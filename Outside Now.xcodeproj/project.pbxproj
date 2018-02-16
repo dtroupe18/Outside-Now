@@ -7,14 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39E228654068DBDD148E5C3B /* Pods_Outside_Now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA3ADDAB66DB827B66395C3 /* Pods_Outside_Now.framework */; };
 		5506399220350B3A00FFF284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506399120350B3A00FFF284 /* AppDelegate.swift */; };
-		5506399420350B3A00FFF284 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506399320350B3A00FFF284 /* ViewController.swift */; };
 		5506399720350B3A00FFF284 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5506399520350B3A00FFF284 /* Main.storyboard */; };
 		5506399A20350B3A00FFF284 /* Outside_Now.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5506399820350B3A00FFF284 /* Outside_Now.xcdatamodeld */; };
 		5506399C20350B3A00FFF284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5506399B20350B3A00FFF284 /* Assets.xcassets */; };
 		5506399F20350B3A00FFF284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5506399D20350B3A00FFF284 /* LaunchScreen.storyboard */; };
 		550639AA20350B3A00FFF284 /* Outside_NowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550639A920350B3A00FFF284 /* Outside_NowTests.swift */; };
 		550639B520350B3A00FFF284 /* Outside_NowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550639B420350B3A00FFF284 /* Outside_NowUITests.swift */; };
+		551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DEA20350C6500455A3E /* Double++Extension.swift */; };
+		551E6DEE20350C9E00455A3E /* HourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DED20350C9E00455A3E /* HourlyCell.swift */; };
+		551E6DF120350CD500455A3E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF020350CD500455A3E /* Weather.swift */; };
+		551E6DF320350CE600455A3E /* HourlyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF220350CE600455A3E /* HourlyWeather.swift */; };
+		551E6DF620350E8A00455A3E /* LocationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF520350E8A00455A3E /* LocationWrapper.swift */; };
+		551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */; };
+		551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DFA20350FAC00455A3E /* WeatherViewController.swift */; };
+		551E6DFD20350FE400455A3E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 551E6DFC20350FE400455A3E /* Keys.plist */; };
+		55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555230F203662A200204E80 /* WeeklySummaryCell.swift */; };
+		55552312203662CF00204E80 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55552311203662CF00204E80 /* WeatherCell.swift */; };
+		55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D392036048D0060334A /* UIApplication++Extension.swift */; };
+		55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D3B2036052C0060334A /* UIViewController++Extension.swift */; };
+		9885AFAD6F466D634E27A806 /* Pods_Outside_NowUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33927C8684ADCF3C980B4E1C /* Pods_Outside_NowUITests.framework */; };
+		B63AEC72C26C107E3DE95163 /* Pods_Outside_NowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C854303ADD873FB1E56D29 /* Pods_Outside_NowTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0ABEE3F88F05A2057881944F /* Pods-Outside NowUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside NowUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests.release.xcconfig"; sourceTree = "<group>"; };
+		17F373B70164E536F01C39CA /* Pods-Outside Now.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside Now.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now.debug.xcconfig"; sourceTree = "<group>"; };
+		33927C8684ADCF3C980B4E1C /* Pods_Outside_NowUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outside_NowUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5506398E20350B3A00FFF284 /* Outside Now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outside Now.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5506399120350B3A00FFF284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5506399320350B3A00FFF284 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5506399620350B3A00FFF284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5506399920350B3A00FFF284 /* Outside_Now.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Outside_Now.xcdatamodel; sourceTree = "<group>"; };
 		5506399B20350B3A00FFF284 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +65,24 @@
 		550639B020350B3A00FFF284 /* Outside NowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Outside NowUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		550639B420350B3A00FFF284 /* Outside_NowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outside_NowUITests.swift; sourceTree = "<group>"; };
 		550639B620350B3A00FFF284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		551E6DEA20350C6500455A3E /* Double++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double++Extension.swift"; sourceTree = "<group>"; };
+		551E6DED20350C9E00455A3E /* HourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCell.swift; sourceTree = "<group>"; };
+		551E6DF020350CD500455A3E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		551E6DF220350CE600455A3E /* HourlyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeather.swift; sourceTree = "<group>"; };
+		551E6DF520350E8A00455A3E /* LocationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWrapper.swift; sourceTree = "<group>"; };
+		551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyWrapper.swift; sourceTree = "<group>"; };
+		551E6DFA20350FAC00455A3E /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		551E6DFC20350FE400455A3E /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		5555230F203662A200204E80 /* WeeklySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummaryCell.swift; sourceTree = "<group>"; };
+		55552311203662CF00204E80 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		55A67D392036048D0060334A /* UIApplication++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication++Extension.swift"; sourceTree = "<group>"; };
+		55A67D3B2036052C0060334A /* UIViewController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController++Extension.swift"; sourceTree = "<group>"; };
+		7BFCC4174CBC6E3ECB304CCA /* Pods-Outside NowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside NowUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		86ABBDA100B288562857ACE7 /* Pods-Outside Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now.release.xcconfig"; sourceTree = "<group>"; };
+		C8C854303ADD873FB1E56D29 /* Pods_Outside_NowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outside_NowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBA42012626214BF9C96B6E0 /* Pods-Outside NowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside NowTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outside NowTests/Pods-Outside NowTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F23E8E41CEC9638693E66938 /* Pods-Outside NowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside NowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outside NowTests/Pods-Outside NowTests.release.xcconfig"; sourceTree = "<group>"; };
+		FCA3ADDAB66DB827B66395C3 /* Pods_Outside_Now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outside_Now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39E228654068DBDD148E5C3B /* Pods_Outside_Now.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63AEC72C26C107E3DE95163 /* Pods_Outside_NowTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9885AFAD6F466D634E27A806 /* Pods_Outside_NowUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +120,8 @@
 				550639A820350B3A00FFF284 /* Outside NowTests */,
 				550639B320350B3A00FFF284 /* Outside NowUITests */,
 				5506398F20350B3A00FFF284 /* Products */,
+				C201060FD9A968DA79560954 /* Pods */,
+				A402E2DB26FED46BD1D6A2EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +138,18 @@
 		5506399020350B3A00FFF284 /* Outside Now */ = {
 			isa = PBXGroup;
 			children = (
+				551E6DEF20350CAC00455A3E /* Structs */,
+				551E6DEC20350C7A00455A3E /* Cells */,
+				551E6DE920350C4800455A3E /* Extensions */,
+				551E6DF420350E6700455A3E /* Wrappers */,
+				551E6DF920350F8C00455A3E /* ViewControllers */,
 				5506399120350B3A00FFF284 /* AppDelegate.swift */,
-				5506399320350B3A00FFF284 /* ViewController.swift */,
 				5506399520350B3A00FFF284 /* Main.storyboard */,
 				5506399B20350B3A00FFF284 /* Assets.xcassets */,
 				5506399D20350B3A00FFF284 /* LaunchScreen.storyboard */,
 				550639A020350B3A00FFF284 /* Info.plist */,
 				5506399820350B3A00FFF284 /* Outside_Now.xcdatamodeld */,
+				551E6DFC20350FE400455A3E /* Keys.plist */,
 			);
 			path = "Outside Now";
 			sourceTree = "<group>";
@@ -128,6 +172,75 @@
 			path = "Outside NowUITests";
 			sourceTree = "<group>";
 		};
+		551E6DE920350C4800455A3E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				551E6DEA20350C6500455A3E /* Double++Extension.swift */,
+				55A67D392036048D0060334A /* UIApplication++Extension.swift */,
+				55A67D3B2036052C0060334A /* UIViewController++Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		551E6DEC20350C7A00455A3E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				551E6DED20350C9E00455A3E /* HourlyCell.swift */,
+				5555230F203662A200204E80 /* WeeklySummaryCell.swift */,
+				55552311203662CF00204E80 /* WeatherCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		551E6DEF20350CAC00455A3E /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				551E6DF020350CD500455A3E /* Weather.swift */,
+				551E6DF220350CE600455A3E /* HourlyWeather.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		551E6DF420350E6700455A3E /* Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				551E6DF520350E8A00455A3E /* LocationWrapper.swift */,
+				551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */,
+			);
+			path = Wrappers;
+			sourceTree = "<group>";
+		};
+		551E6DF920350F8C00455A3E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				551E6DFA20350FAC00455A3E /* WeatherViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A402E2DB26FED46BD1D6A2EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCA3ADDAB66DB827B66395C3 /* Pods_Outside_Now.framework */,
+				C8C854303ADD873FB1E56D29 /* Pods_Outside_NowTests.framework */,
+				33927C8684ADCF3C980B4E1C /* Pods_Outside_NowUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C201060FD9A968DA79560954 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17F373B70164E536F01C39CA /* Pods-Outside Now.debug.xcconfig */,
+				86ABBDA100B288562857ACE7 /* Pods-Outside Now.release.xcconfig */,
+				CBA42012626214BF9C96B6E0 /* Pods-Outside NowTests.debug.xcconfig */,
+				F23E8E41CEC9638693E66938 /* Pods-Outside NowTests.release.xcconfig */,
+				7BFCC4174CBC6E3ECB304CCA /* Pods-Outside NowUITests.debug.xcconfig */,
+				0ABEE3F88F05A2057881944F /* Pods-Outside NowUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +248,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 550639B920350B3A00FFF284 /* Build configuration list for PBXNativeTarget "Outside Now" */;
 			buildPhases = (
+				81865EF90F41469E046A95B5 /* [CP] Check Pods Manifest.lock */,
 				5506398A20350B3A00FFF284 /* Sources */,
 				5506398B20350B3A00FFF284 /* Frameworks */,
 				5506398C20350B3A00FFF284 /* Resources */,
+				25ADDE06B94E0F0A3E54F760 /* [CP] Embed Pods Frameworks */,
+				F8AF6DE12136A09446812720 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +268,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 550639BC20350B3A00FFF284 /* Build configuration list for PBXNativeTarget "Outside NowTests" */;
 			buildPhases = (
+				8DC03142D06C8D7052BC3877 /* [CP] Check Pods Manifest.lock */,
 				550639A120350B3A00FFF284 /* Sources */,
 				550639A220350B3A00FFF284 /* Frameworks */,
 				550639A320350B3A00FFF284 /* Resources */,
+				7F8321A725E5006F5D69006F /* [CP] Embed Pods Frameworks */,
+				DC76A205D17AFFEA319921A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +289,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 550639BF20350B3A00FFF284 /* Build configuration list for PBXNativeTarget "Outside NowUITests" */;
 			buildPhases = (
+				6A65E1C9B04E51641F8D5E1A /* [CP] Check Pods Manifest.lock */,
 				550639AC20350B3A00FFF284 /* Sources */,
 				550639AD20350B3A00FFF284 /* Frameworks */,
 				550639AE20350B3A00FFF284 /* Resources */,
+				D707B4717E6414F496D2A3D8 /* [CP] Embed Pods Frameworks */,
+				C5A35CF567CBB31C6380DEA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -235,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				551E6DFD20350FE400455A3E /* Keys.plist in Resources */,
 				5506399F20350B3A00FFF284 /* LaunchScreen.storyboard in Resources */,
 				5506399C20350B3A00FFF284 /* Assets.xcassets in Resources */,
 				5506399720350B3A00FFF284 /* Main.storyboard in Resources */,
@@ -257,13 +380,177 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		25ADDE06B94E0F0A3E54F760 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A65E1C9B04E51641F8D5E1A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Outside NowUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F8321A725E5006F5D69006F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowTests/Pods-Outside NowTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81865EF90F41469E046A95B5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Outside Now-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DC03142D06C8D7052BC3877 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Outside NowTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5A35CF567CBB31C6380DEA0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D707B4717E6414F496D2A3D8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC76A205D17AFFEA319921A2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowTests/Pods-Outside NowTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8AF6DE12136A09446812720 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5506398A20350B3A00FFF284 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5506399420350B3A00FFF284 /* ViewController.swift in Sources */,
+				55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */,
+				55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */,
+				551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */,
+				551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */,
+				55552312203662CF00204E80 /* WeatherCell.swift in Sources */,
+				551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */,
+				55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */,
+				551E6DF120350CD500455A3E /* Weather.swift in Sources */,
 				5506399220350B3A00FFF284 /* AppDelegate.swift in Sources */,
+				551E6DF320350CE600455A3E /* HourlyWeather.swift in Sources */,
+				551E6DF620350E8A00455A3E /* LocationWrapper.swift in Sources */,
+				551E6DEE20350C9E00455A3E /* HourlyCell.swift in Sources */,
 				5506399A20350B3A00FFF284 /* Outside_Now.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,13 +715,14 @@
 		};
 		550639BA20350B3A00FFF284 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17F373B70164E536F01C39CA /* Pods-Outside Now.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D3D7B5BPEZ;
 				INFOPLIST_FILE = "Outside Now/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.HighTreeDevelopment.OutsideNow.Outside-Now";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HighTreeDevelopment.Outside-Now";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -443,13 +731,14 @@
 		};
 		550639BB20350B3A00FFF284 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86ABBDA100B288562857ACE7 /* Pods-Outside Now.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D3D7B5BPEZ;
 				INFOPLIST_FILE = "Outside Now/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.HighTreeDevelopment.OutsideNow.Outside-Now";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HighTreeDevelopment.Outside-Now";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,6 +747,7 @@
 		};
 		550639BD20350B3A00FFF284 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBA42012626214BF9C96B6E0 /* Pods-Outside NowTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -475,6 +765,7 @@
 		};
 		550639BE20350B3A00FFF284 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F23E8E41CEC9638693E66938 /* Pods-Outside NowTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -492,6 +783,7 @@
 		};
 		550639C020350B3A00FFF284 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BFCC4174CBC6E3ECB304CCA /* Pods-Outside NowUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -508,6 +800,7 @@
 		};
 		550639C120350B3A00FFF284 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ABEE3F88F05A2057881944F /* Pods-Outside NowUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

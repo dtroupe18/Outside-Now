@@ -18,7 +18,7 @@ class DarkSkyWrapper {
     static let shared = DarkSkyWrapper()
     var response: JSON?
     
-    func getForcast(lat: Double, long: Double, completionHandler: @escaping ([Weather]?, [HourlyWeather]?, Error?) -> ()) {
+    func getForecast(lat: Double, long: Double, completionHandler: @escaping ([Weather]?, [HourlyWeather]?, Error?) -> ()) {
         if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
             DispatchQueue.global(qos: .utility).async {
                 Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long)").responseJSON { (responseData) -> Void in

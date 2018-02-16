@@ -240,7 +240,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     func getWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        DarkSkyWrapper.shared.getForcast(lat: latitude, long: longitude, completionHandler: { weatherArray, hourlyArray, error in
+        DarkSkyWrapper.shared.getForecast(lat: latitude, long: longitude, completionHandler: { weatherArray, hourlyArray, error in
             
             if error != nil {
                 print("Error: \(error!)")

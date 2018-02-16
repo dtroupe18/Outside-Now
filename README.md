@@ -2,12 +2,12 @@
 
 
 ## You will be provided with the following weather information.
-•	Current temperature
-•	A 24-hour weather summary
-•	The low and high temperature for the current day
-•	Hourly forecast for the next 48 hours which includes the time, temperature, and probability of precipitation
-•	Weekly weather summary
-•	8 Day forecast which includes the high and low temperature for each day
+- Current temperature
+- A 24-hour weather summary
+- The low and high temperature for the current day
+- Hourly forecast for the next 48 hours which includes the time, temperature, and probability of precipitation
+- Weekly weather summary
+- 8 Day forecast which includes the high and low temperature for each day
 
 ## Outside Now 
   1. Automatically gets your local weather forcast (if you allow access to your location).

@@ -56,8 +56,8 @@ class LocationWrapper {
                 if let err = error {
                     completion(nil, err)
                 }
-                else {
-                    let placemarkArray = placemarks! as [CLPlacemark]
+                if let places = placemarks {
+                    let placemarkArray = places as [CLPlacemark]
                     if !placemarkArray.isEmpty {
                         completion(placemarkArray[0], nil)
                     }
@@ -66,6 +66,20 @@ class LocationWrapper {
         } else {
             print("Auth status failed... in locationWrapper")
         }
+    }
+    
+    func searchForPlacemark(text: String, completion: @escaping (_ placemark: CLPlacemark?, _ error: Error?) -> ()) {
+        geoCoder.geocodeAddressString(text, completionHandler: { (placemarks, error) in
+            if let err = error {
+                completion(nil, err)
+            }
+            if let places = placemarks {
+                let placemarkArray = places as [CLPlacemark]
+                if !placemarkArray.isEmpty {
+                    completion(placemarkArray[0], nil)
+                }
+            }
+        })
     }
 }
 

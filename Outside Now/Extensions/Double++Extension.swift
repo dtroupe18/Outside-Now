@@ -11,18 +11,18 @@ import Foundation
 extension Double {
     
     var stringRepresentation: String? {
-        let formatter = NumberFormatter()
-        // Rounds the number and removes the trailing zeros from the string representation
+        // Rounds a Double and removes the trailing zeros from the string representation
         //
+        let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 0
         let formatedString = formatter.string(from: NSNumber(value: self))
         return formatedString
     }
     
     var percentString: String? {
-        let formatter = NumberFormatter()
-        // Use the formatter to add a % symbol and convert the decimal into a percent
+        // Use the formatter to add a % symbol and convert a decimal (Double) into a percent
         //
+        let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         let formattedString = formatter.string(from: NSNumber(value: self))
         return formattedString

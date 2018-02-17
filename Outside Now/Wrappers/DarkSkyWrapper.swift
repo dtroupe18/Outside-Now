@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
-import SwiftIcons
-
 
 class DarkSkyWrapper {
     
@@ -81,28 +79,58 @@ class DarkSkyWrapper {
     static func convertIconNameToImage(iconName: String) -> UIImage {
         switch iconName {
         case "clear-day":
-            return UIImage.init(icon: .weather(.daySunny), size: CGSize(width: 40, height: 42), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "clear-day")
         case "clear-night":
-            return UIImage.init(icon: .weather(.nightClear), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "clear-night")
         case "partly-cloudy-day":
-            return UIImage.init(icon: .weather(.dayCloudy), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "partly-cloudy-day")
         case "partly-cloudy-night":
-            return UIImage.init(icon: .weather(.nightCloudy), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "partly-cloudy-night")
         case "cloudy":
-            return UIImage.init(icon: .weather(.cloudy), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "cloudy")
         case "rain":
-            return UIImage.init(icon: .weather(.rain), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "rain")
         case "sleet":
-            return UIImage.init(icon: .weather(.sleet), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "sleet")
         case "snow":
-            return UIImage.init(icon: .weather(.snow), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "snow")
         case "wind":
-            return UIImage.init(icon: .weather(.windy), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            return #imageLiteral(resourceName: "wind")
         case "fog":
-            return UIImage.init(icon: .weather(.fog), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            // Returns the cloudy image with "FOG" written below the cloud
+            //
+            if let annotatedImage = textToImage(drawText: "FOG", inImage: #imageLiteral(resourceName: "cloudy"), atPoint: CGPoint(x: 5, y: 28)) {
+                return annotatedImage
+            } else {
+                return #imageLiteral(resourceName: "cloudy")
+            }
         default:
-            return UIImage.init(icon: .weather(.na), size: CGSize(width: 40.0, height: 42.0), textColor: .white, backgroundColor: .clear)
+            // Default value is error. Prevents issues if new images are added
+            //
+            return #imageLiteral(resourceName: "error")
         }
+    }
+    
+    static func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage? {
+        let textColor = UIColor.white
+        let textFont = UIFont(name: "Helvetica", size: 12)!
+        
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+        
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ] as [NSAttributedStringKey : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+        
+        let rect = CGRect(origin: point, size: image.size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
     
     static func convertTimestampToHour(seconds: Double) -> String {

@@ -87,7 +87,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NmV-mi-ugV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NmV-mi-ugV">
                                                     <rect key="frame" x="19" y="31" width="40" height="42"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tI-eX-n6b">
@@ -183,11 +183,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDz-TE-6sV">
+                                                    <rect key="frame" x="250.5" y="16" width="21" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="z3H-zX-NlS" firstAttribute="centerX" secondItem="vrr-na-yez" secondAttribute="centerX" id="4xE-ms-p4e"/>
                                                 <constraint firstItem="z3H-zX-NlS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2OZ-YU-edW" secondAttribute="trailing" constant="8" id="9La-nv-Id3"/>
-                                                <constraint firstItem="hwj-RY-jwF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="z3H-zX-NlS" secondAttribute="trailing" constant="8" id="BBw-To-vuI"/>
                                                 <constraint firstItem="2OZ-YU-edW" firstAttribute="leading" secondItem="vrr-na-yez" secondAttribute="leadingMargin" constant="8" id="FS1-Yo-lIe"/>
                                                 <constraint firstAttribute="trailing" secondItem="1q3-TM-da3" secondAttribute="trailing" constant="8" id="Kdu-bJ-rYR"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="2OZ-YU-edW" secondAttribute="bottom" constant="5" id="Xtc-qO-NDY"/>
@@ -195,13 +200,17 @@
                                                 <constraint firstItem="2OZ-YU-edW" firstAttribute="top" secondItem="vrr-na-yez" secondAttribute="topMargin" constant="4" id="evG-zO-n8t"/>
                                                 <constraint firstItem="1q3-TM-da3" firstAttribute="leading" secondItem="hwj-RY-jwF" secondAttribute="trailing" constant="10" id="ffD-Pa-8gW"/>
                                                 <constraint firstItem="1q3-TM-da3" firstAttribute="centerY" secondItem="2OZ-YU-edW" secondAttribute="centerY" id="fny-Qe-sBL"/>
+                                                <constraint firstItem="HDz-TE-6sV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="z3H-zX-NlS" secondAttribute="trailing" constant="8" id="gkF-ha-Qv3"/>
+                                                <constraint firstItem="HDz-TE-6sV" firstAttribute="centerY" secondItem="2OZ-YU-edW" secondAttribute="centerY" id="jxC-To-tWT"/>
                                                 <constraint firstItem="z3H-zX-NlS" firstAttribute="centerY" secondItem="2OZ-YU-edW" secondAttribute="centerY" id="pa5-1c-1bj"/>
+                                                <constraint firstItem="hwj-RY-jwF" firstAttribute="leading" secondItem="HDz-TE-6sV" secondAttribute="trailing" constant="50" id="tNy-rd-EqT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dayLabel" destination="2OZ-YU-edW" id="ejE-es-Srb"/>
                                             <outlet property="hiLabel" destination="hwj-RY-jwF" id="Hwx-K2-j4y"/>
                                             <outlet property="lowLabel" destination="1q3-TM-da3" id="tgp-qJ-h9C"/>
+                                            <outlet property="precipPercentLabel" destination="HDz-TE-6sV" id="Jbr-lT-K7k"/>
                                             <outlet property="weatherImageView" destination="z3H-zX-NlS" id="Az9-wQ-IZO"/>
                                         </connections>
                                     </tableViewCell>

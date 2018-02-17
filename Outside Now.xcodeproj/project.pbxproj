@@ -27,6 +27,7 @@
 		55552312203662CF00204E80 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55552311203662CF00204E80 /* WeatherCell.swift */; };
 		5555231420375C7500204E80 /* Date++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555231320375C7500204E80 /* Date++Extension.swift */; };
 		555523162037723300204E80 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555523152037723300204E80 /* CustomActivityIndicator.swift */; };
+		5585BDEB20387F1E0076AD4D /* UIScrollView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */; };
 		55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D392036048D0060334A /* UIApplication++Extension.swift */; };
 		55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D3B2036052C0060334A /* UIViewController++Extension.swift */; };
 		9885AFAD6F466D634E27A806 /* Pods_Outside_NowUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33927C8684ADCF3C980B4E1C /* Pods_Outside_NowUITests.framework */; };
@@ -79,6 +80,7 @@
 		55552311203662CF00204E80 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		5555231320375C7500204E80 /* Date++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++Extension.swift"; sourceTree = "<group>"; };
 		555523152037723300204E80 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
+		5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView++Extension.swift"; sourceTree = "<group>"; };
 		55A67D392036048D0060334A /* UIApplication++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication++Extension.swift"; sourceTree = "<group>"; };
 		55A67D3B2036052C0060334A /* UIViewController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController++Extension.swift"; sourceTree = "<group>"; };
 		7BFCC4174CBC6E3ECB304CCA /* Pods-Outside NowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside NowUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				55A67D392036048D0060334A /* UIApplication++Extension.swift */,
 				55A67D3B2036052C0060334A /* UIViewController++Extension.swift */,
 				5555231320375C7500204E80 /* Date++Extension.swift */,
+				5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,13 +398,11 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +549,7 @@
 				55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */,
 				55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */,
 				551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */,
+				5585BDEB20387F1E0076AD4D /* UIScrollView++Extension.swift in Sources */,
 				551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */,
 				55552312203662CF00204E80 /* WeatherCell.swift in Sources */,
 				551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */,

@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import SwiftIcons
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
@@ -161,10 +160,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             cell.dayLabel.text = DarkSkyWrapper.convertTimestampToDayName(seconds: weatherArray[index].time)
             cell.hiLabel.text = weatherArray[index].highTemp.stringRepresentation
             cell.lowLabel.text = weatherArray[index].lowTemp.stringRepresentation
+            cell.precipPercentLabel.text = weatherArray[index].precipProbability.percentString
             cell.backgroundColor = UIColor.black
             cell.dayLabel.textColor = UIColor.white
             cell.hiLabel.textColor = UIColor.white
             cell.lowLabel.textColor = UIColor.white
+            cell.precipPercentLabel.textColor = UIColor.white
             cell.selectionStyle = .none
             return cell
         }
@@ -252,6 +253,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             }
             if let hourly = hourlyArray {
                 self.hourlyWeather = hourly
+                self.collectionView.resetScrollPositionToTop()
                 self.collectionView.reloadData()
             } else {
                 print("hourlyWeather = nil")

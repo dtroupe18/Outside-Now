@@ -14,6 +14,7 @@ class WeatherCell: UITableViewCell {
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var hiLabel: UILabel!
     @IBOutlet weak var lowLabel: UILabel!
+    @IBOutlet weak var precipPercentLabel: UILabel!
     
 
     override func awakeFromNib() {

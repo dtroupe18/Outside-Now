@@ -15,7 +15,7 @@ class LocationWrapper {
     static let shared = LocationWrapper()
     let locationManager = CLLocationManager()
     let geoCoder = CLGeocoder()
-    var currentLocation: CLLocation!
+    var currentLocation: CLLocation?
     var authStatus = CLLocationManager.authorizationStatus()
    
     
@@ -51,15 +51,43 @@ class LocationWrapper {
     
     func getPlaceMark(completion: @escaping(_ placemark: CLPlacemark?, _ error: Error?) ->()) {
         if self.authStatus == .authorizedWhenInUse || self.authStatus == .authorizedAlways {
-            self.currentLocation = locationManager.location
-            geoCoder.reverseGeocodeLocation(self.currentLocation) { placemarks, error in
-                if let err = error {
-                    completion(nil, err)
+            if let location = locationManager.location {
+                self.currentLocation = location
+                geoCoder.reverseGeocodeLocation(location) { placemarks, error in
+                    if let err = error {
+                        completion(nil, err)
+                    }
+                    if let places = placemarks {
+                        let placemarkArray = places as [CLPlacemark]
+                        if !placemarkArray.isEmpty {
+                            completion(placemarkArray[0], nil)
+                        }
+                    }
                 }
-                if let places = placemarks {
-                    let placemarkArray = places as [CLPlacemark]
-                    if !placemarkArray.isEmpty {
-                        completion(placemarkArray[0], nil)
+            }
+            else if let location = self.currentLocation {
+                geoCoder.reverseGeocodeLocation(location) { placemarks, error in
+                    if let err = error {
+                        completion(nil, err)
+                    }
+                    if let places = placemarks {
+                        let placemarkArray = places as [CLPlacemark]
+                        if !placemarkArray.isEmpty {
+                            completion(placemarkArray[0], nil)
+                        }
+                    }
+                }
+            }
+            else if let location = CLLocationManager().location {
+                geoCoder.reverseGeocodeLocation(location) { placemarks, error in
+                    if let err = error {
+                        completion(nil, err)
+                    }
+                    if let places = placemarks {
+                        let placemarkArray = places as [CLPlacemark]
+                        if !placemarkArray.isEmpty {
+                            completion(placemarkArray[0], nil)
+                        }
                     }
                 }
             }

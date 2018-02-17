@@ -31,6 +31,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("ViewWillAppear....")
         if LocationWrapper.shared.canAccessLocation() {
             getPlacemark()
         }
@@ -38,6 +39,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Refresh notification
+        //
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        
+        
         self.hideKeyboardWhenTappedAround()
         LocationWrapper.shared.locationManager.delegate = self
         collectionView.delegate = self
@@ -78,6 +85,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 showAlert(title: "Location Access Denied", message: "Without access to your location outside now can only provide weather if your search for a location. You can update location access in settings.")
             }
         }
+        print("ViewDidAppear fired...")
     }
     
     // Marker: CLLocationManagerDelegate
@@ -181,6 +189,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 if self.shouldRefreshWeather(placemark: p) {
                     CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
                     self.parsePlacemark(placemark: p)
+                } else {
+                    // Do nothing
+                    //
+                   // print("Not refreshing weather")
                 }
             }
         })
@@ -311,8 +323,18 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         }
     }
     
+    @objc func applicationWillEnterForeground() {
+        print("Application will enter foreground fired...")
+        getPlacemark()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    deinit {
+        // Remove the noticiation
+        //
+        NotificationCenter.default.removeObserver(self)
     }
 }

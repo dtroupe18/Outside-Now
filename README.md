@@ -1,5 +1,7 @@
 # Outside-Now is a simple no-frills weather app that allows you to get the current weather, hourly weather for the next 48 hours and an 8-day forecast at the same time
 
+## [App Store Link](https://itunes.apple.com/us/app/outsidenow/id1329825045?mt=8)
+
 
 ## You will be provided with the following weather information.
 - Current temperature
@@ -15,7 +17,7 @@
 
 ## Tools used to develop Outside-Now:
   1. Weather data comes from [Dark Sky's API](https://darksky.net/dev)
-  2. CocoaPods used - [AlamoFire](https://github.com/Alamofire/Alamofire), [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON), [SwiftIcons](https://github.com/ranesr/SwiftIcons)
+  2. CocoaPods used - [AlamoFire](https://github.com/Alamofire/Alamofire), [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON
   3. Standard Libraries used - [CoreLocation](https://developer.apple.com/documentation/corelocation)
 
 

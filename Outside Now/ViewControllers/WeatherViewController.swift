@@ -29,6 +29,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     var weatherArray = [Weather]()
     var hourlyWeather = [HourlyWeather]()
     
+    var selectedIndex: Int = -1
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("ViewWillAppear....")
@@ -140,7 +142,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         } else {
             // One extra row for the weekly summary
             //
-            return weatherArray.count + 1
+            return weatherArray.count
         }
     }
     
@@ -161,9 +163,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherCell
-            // Remember the index here is +1 larger so we have to adjust to avoid an out of bounds exception
+            // Skip index 0 which is the current days weather since it is already displayed
             //
-            let index = indexPath.row - 1
+            let index = indexPath.row
             cell.weatherImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: weatherArray[index].iconName)
             cell.dayLabel.text = DarkSkyWrapper.convertTimestampToDayName(seconds: weatherArray[index].time)
             cell.hiLabel.text = weatherArray[index].highTemp.stringRepresentation
@@ -179,7 +181,18 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         }
     }
     
-    // Marker: Location
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Segue to that days weather
+        //
+        if indexPath.row != 0 && lastPlacemark != nil {
+            // Subtract one becuase the tableview has a summary row at index 0
+            //
+            selectedIndex = indexPath.row - 1
+            self.performSegue(withIdentifier: "toDailyWeather", sender: nil)
+        }
+    }
+    
+    // Marker: Location - Weather
     //
     func getPlacemark() {
         LocationWrapper.shared.getPlaceMark(completion: { placemark, error in
@@ -324,8 +337,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     @objc func applicationWillEnterForeground() {
-        print("Application will enter foreground fired...")
+        // print("Application will enter foreground fired...")
         getPlacemark()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDailyWeather" {
+            if let vc = segue.destination as? DayViewController {
+                vc.locationString = locationLabel.text
+                if selectedIndex != -1 {
+                    vc.weather = weatherArray[selectedIndex]
+                }
+                if let placemark = lastPlacemark {
+                    vc.placemark = placemark
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

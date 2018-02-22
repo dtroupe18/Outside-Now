@@ -16,6 +16,38 @@ class DarkSkyWrapper {
     static let shared = DarkSkyWrapper()
     var response: JSON?
     
+    var responses = [String: JSON]()
+    
+    func getFutureForecast(lat: Double, long: Double, formattedTime: String, completionHandler: @escaping (DailySummary?, [HourlyWeather]?, Error?) ->()) {
+        if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
+            DispatchQueue.global(qos: .utility).async {
+                
+                print("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)")
+                Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)").responseJSON(completionHandler: { (responseData) -> Void in
+                    
+                    if let error = responseData.result.error as? AFError {
+                        let err = NSError(domain: "Future Weather Request Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "\(error.localizedDescription)"])
+                        completionHandler(nil, nil, err)
+                    }
+                    else if responseData.result.value != nil {
+                        let json = JSON(responseData.result.value!)
+                        // Get summary, sunrise, sunset time
+                        //
+                        let dailySummary = DailySummary(fullJson: json)
+                        // Get hourly weather for that day
+                        //
+                        var hourlyWeatherArray = [HourlyWeather]()
+                        for hour in json["hourly"]["data"].arrayValue {
+                            let hourlyWeather = HourlyWeather(json: hour)
+                            hourlyWeatherArray.append(hourlyWeather)
+                        }
+                        completionHandler(dailySummary, hourlyWeatherArray, nil)
+                    }
+                })
+            }
+        }
+    }
+    
     func getForecast(lat: Double, long: Double, completionHandler: @escaping ([Weather]?, [HourlyWeather]?, Error?) -> ()) {
         if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
             DispatchQueue.global(qos: .utility).async {
@@ -37,14 +69,22 @@ class DarkSkyWrapper {
                         weatherArray.append(currentWeather)
                         
                         // Get Weather for the week
+                        //
                         var first = true
                         for day in swiftyJson["daily"]["data"].arrayValue {
-                            if first {
+                            if !first {
+                                // Skip the first day since that information is already displayed
+                                //
+                                let dailyWeather = Weather(json: day)
+                                print("not first... \(DarkSkyWrapper.convertTimestampToDayName(seconds: dailyWeather.time))")
+                                weatherArray.append(dailyWeather)
+                                print("not first size: \(weatherArray.count)")
+                            } else {
+                                let dailyWeather = Weather(json: day)
+                                print("first... \(DarkSkyWrapper.convertTimestampToDayName(seconds: dailyWeather.time))")
+                                print("first size: \(weatherArray.count)")
                                 first = false
-                                continue
                             }
-                            let dailyWeather = Weather(json: day)
-                            weatherArray.append(dailyWeather)
                             // print("dailyWeather: \(dailyWeather)")
                         }
                         
@@ -112,6 +152,8 @@ class DarkSkyWrapper {
     }
     
     static func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage? {
+        // Function draws text on an image
+        //
         let textColor = UIColor.white
         let textFont = UIFont(name: "Helvetica", size: 12)!
         
@@ -141,6 +183,18 @@ class DarkSkyWrapper {
         // "a" prints "pm" or "am"
         //
         formatter.dateFormat = "h a"
+        let hourString = formatter.string(from: date)
+        return hourString
+    }
+    
+    static func convertTimestampToHourMin(seconds: Double) -> String {
+        // Convert seconds to a string representing that hour
+        //
+        let date = Date(timeIntervalSince1970: seconds)
+        let formatter = DateFormatter()
+        // "a" prints "pm" or "am"
+        //
+        formatter.dateFormat = "h:mm a"
         let hourString = formatter.string(from: date)
         return hourString
     }

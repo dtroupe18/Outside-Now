@@ -15,6 +15,8 @@ struct HourlyWeather {
     let precipProbability: Double
     let iconName: String
     let time: Double
+    let humidity: Double
+    let windSpeed: Double
     
     init(json: JSON) {
         // Takes the response at "hourly"-> "data" -> List
@@ -23,5 +25,7 @@ struct HourlyWeather {
         self.precipProbability = json["precipProbability"].doubleValue
         self.iconName = json["icon"].stringValue
         self.time = json["time"].doubleValue
+        self.humidity = json["humidity"].doubleValue
+        self.windSpeed = json["windSpeed"].doubleValue
     }
 }

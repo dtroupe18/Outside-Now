@@ -23,6 +23,8 @@
 		551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */; };
 		551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DFA20350FAC00455A3E /* WeatherViewController.swift */; };
 		551E6DFD20350FE400455A3E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 551E6DFC20350FE400455A3E /* Keys.plist */; };
+		5550E376203F46A800C9A5A5 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550E375203F46A800C9A5A5 /* DailySummary.swift */; };
+		5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */; };
 		55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555230F203662A200204E80 /* WeeklySummaryCell.swift */; };
 		55552312203662CF00204E80 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55552311203662CF00204E80 /* WeatherCell.swift */; };
 		5555231420375C7500204E80 /* Date++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555231320375C7500204E80 /* Date++Extension.swift */; };
@@ -30,6 +32,7 @@
 		5585BDEB20387F1E0076AD4D /* UIScrollView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */; };
 		55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D392036048D0060334A /* UIApplication++Extension.swift */; };
 		55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D3B2036052C0060334A /* UIViewController++Extension.swift */; };
+		55BA93DA203F364B002FD324 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BA93D9203F364B002FD324 /* DayViewController.swift */; };
 		9885AFAD6F466D634E27A806 /* Pods_Outside_NowUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33927C8684ADCF3C980B4E1C /* Pods_Outside_NowUITests.framework */; };
 		B63AEC72C26C107E3DE95163 /* Pods_Outside_NowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C854303ADD873FB1E56D29 /* Pods_Outside_NowTests.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +79,8 @@
 		551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyWrapper.swift; sourceTree = "<group>"; };
 		551E6DFA20350FAC00455A3E /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		551E6DFC20350FE400455A3E /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		5550E375203F46A800C9A5A5 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
+		5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
 		5555230F203662A200204E80 /* WeeklySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummaryCell.swift; sourceTree = "<group>"; };
 		55552311203662CF00204E80 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		5555231320375C7500204E80 /* Date++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++Extension.swift"; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 		5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView++Extension.swift"; sourceTree = "<group>"; };
 		55A67D392036048D0060334A /* UIApplication++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication++Extension.swift"; sourceTree = "<group>"; };
 		55A67D3B2036052C0060334A /* UIViewController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController++Extension.swift"; sourceTree = "<group>"; };
+		55BA93D9203F364B002FD324 /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		7BFCC4174CBC6E3ECB304CCA /* Pods-Outside NowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside NowUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		86ABBDA100B288562857ACE7 /* Pods-Outside Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outside Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now.release.xcconfig"; sourceTree = "<group>"; };
 		C8C854303ADD873FB1E56D29 /* Pods_Outside_NowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outside_NowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +202,7 @@
 				551E6DED20350C9E00455A3E /* HourlyCell.swift */,
 				5555230F203662A200204E80 /* WeeklySummaryCell.swift */,
 				55552311203662CF00204E80 /* WeatherCell.swift */,
+				5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 			children = (
 				551E6DF020350CD500455A3E /* Weather.swift */,
 				551E6DF220350CE600455A3E /* HourlyWeather.swift */,
+				5550E375203F46A800C9A5A5 /* DailySummary.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				551E6DFA20350FAC00455A3E /* WeatherViewController.swift */,
+				55BA93D9203F364B002FD324 /* DayViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -547,10 +556,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */,
+				55BA93DA203F364B002FD324 /* DayViewController.swift in Sources */,
 				55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */,
 				551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */,
 				5585BDEB20387F1E0076AD4D /* UIScrollView++Extension.swift in Sources */,
 				551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */,
+				5550E376203F46A800C9A5A5 /* DailySummary.swift in Sources */,
+				5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */,
 				55552312203662CF00204E80 /* WeatherCell.swift in Sources */,
 				551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */,
 				55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */,

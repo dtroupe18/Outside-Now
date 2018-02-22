@@ -49,4 +49,13 @@ struct Weather {
         
         // print("Todays weather: \(self)")
     }
+    
+    func getFormattedTime() -> String? {
+        // Since time is a Double it has a trailing .0 this causes the HTTP request to fail
+        // to avoid this reformat the number to remove the fractional digits
+        //
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 0
+        return formatter.string(from: NSNumber(value: self.time))
+    }
 }

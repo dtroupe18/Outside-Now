@@ -87,7 +87,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 showAlert(title: "Location Access Denied", message: "Without access to your location outside now can only provide weather if your search for a location. You can update location access in settings.")
             }
         }
-        print("ViewDidAppear fired...")
     }
     
     // Marker: CLLocationManagerDelegate
@@ -316,6 +315,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         guard let text = textField.text else { return true }
+        textField.text = ""
         LocationWrapper.shared.searchForPlacemark(text: text, completion: { placemark, error in
             if let err = error {
                 print(err.localizedDescription)
@@ -337,7 +337,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     @objc func applicationWillEnterForeground() {
-        // print("Application will enter foreground fired...")
         getPlacemark()
     }
     

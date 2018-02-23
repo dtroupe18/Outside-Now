@@ -22,7 +22,6 @@ class DarkSkyWrapper {
         if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
             DispatchQueue.global(qos: .utility).async {
                 
-                print("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)")
                 Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)").responseJSON(completionHandler: { (responseData) -> Void in
                     
                     if let error = responseData.result.error as? AFError {
@@ -76,16 +75,10 @@ class DarkSkyWrapper {
                                 // Skip the first day since that information is already displayed
                                 //
                                 let dailyWeather = Weather(json: day)
-                                print("not first... \(DarkSkyWrapper.convertTimestampToDayName(seconds: dailyWeather.time))")
                                 weatherArray.append(dailyWeather)
-                                print("not first size: \(weatherArray.count)")
                             } else {
-                                let dailyWeather = Weather(json: day)
-                                print("first... \(DarkSkyWrapper.convertTimestampToDayName(seconds: dailyWeather.time))")
-                                print("first size: \(weatherArray.count)")
                                 first = false
                             }
-                            // print("dailyWeather: \(dailyWeather)")
                         }
                         
                         // Get Hourly Weather

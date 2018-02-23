@@ -54,8 +54,20 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         locationLabel.text = locationString
         sunsetImageView.image = #imageLiteral(resourceName: "SunsetImage")
         sunriseImageView.image = #imageLiteral(resourceName: "SunriseImage")
-        hiLabel.text = "Hi  \(weather.highTemp.stringRepresentation ?? "")"
-        loLabel.text = "Low \(weather.lowTemp.stringRepresentation ?? "")"
+        
+        // Make "Hi: & Low: bold on their labels
+        //
+        let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)]
+        let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
+        let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
+        let attributedHiTemp = NSMutableAttributedString(string: "\(weather.highTemp.stringRepresentation ?? "")°")
+        let attributedLowTemp = NSMutableAttributedString(string: "\(weather.lowTemp.stringRepresentation ?? "")°")
+        
+        attributedHi.append(attributedHiTemp)
+        attributedLow.append(attributedLowTemp)
+    
+        hiLabel.attributedText = attributedHi
+        loLabel.attributedText = attributedLow
         
         let border = CALayer()
         border.borderColor = UIColor.white.cgColor
@@ -122,9 +134,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.tempLabel.text = hourlyWeather[indexPath.row].temperature.stringRepresentation
         cell.precipLabel.text = hourlyWeather[indexPath.row].precipProbability.percentString
         cell.windLabel.text = hourlyWeather[indexPath.row].windSpeed.windSpeedString
-        
         cell.selectionStyle = .none
-        
         return cell
     }
     

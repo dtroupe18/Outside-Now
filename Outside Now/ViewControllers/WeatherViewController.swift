@@ -221,8 +221,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             self.lastPlacemark = placemark
             self.lastTimestamp = Date().millisecondsSinceEpoch
             return true
-        }
-        else if fifteenMinutesSinceLastRequest() || isNewCity(placemark: placemark) {
+        } else if fifteenMinutesSinceLastRequest() {
             return true
         } else {
             return false

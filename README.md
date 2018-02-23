@@ -17,7 +17,7 @@
 
 ## Tools used to develop Outside-Now:
   1. Weather data comes from [Dark Sky's API](https://darksky.net/dev)
-  2. CocoaPods used - [AlamoFire](https://github.com/Alamofire/Alamofire),[SwiftyJSON(https://github.com/SwiftyJSON/SwiftyJSON
+  2. CocoaPods used - [AlamoFire](https://github.com/Alamofire/Alamofire),[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON
   3. Standard Libraries used - [CoreLocation](https://developer.apple.com/documentation/corelocation)
 
 

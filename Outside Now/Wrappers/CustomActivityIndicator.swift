@@ -27,14 +27,13 @@ class CustomActivityIndicator {
         uiView.isUserInteractionEnabled = false
         loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         loadingView.center = uiView.center
-        loadingView.backgroundColor = UIColor.lightGray
+        loadingView.backgroundColor = UIColor.darkGray
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
         
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activityIndicator.activityIndicatorViewStyle =
-            UIActivityIndicatorViewStyle.whiteLarge
-        activityIndicator.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.center = CGPoint(x: loadingView.frame.width / 2, y: loadingView.frame.height / 2)
         activityIndicator.hidesWhenStopped = true
         
         DispatchQueue.main.async {

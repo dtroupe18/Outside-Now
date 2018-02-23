@@ -320,6 +320,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 print(err.localizedDescription)
             }
             if let p = placemark {
+                CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
                 self.parsePlacemark(placemark: p)
             }
         })

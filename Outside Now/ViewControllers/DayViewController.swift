@@ -24,28 +24,65 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var header: UIView!
     
+    @IBOutlet weak var headerTimeLabel: UILabel!
+    @IBOutlet weak var headerCondLabel: UILabel!
+    @IBOutlet weak var headerTempLabel: UILabel!
+    @IBOutlet weak var headerPrecipLabel: UILabel!
+    @IBOutlet weak var headerWindLabel: UILabel!
+    
     var placemark: CLPlacemark!
     var weather: Weather!
     var locationString: String!
     
     var hourlyWeather = [HourlyWeather]()
     
-    override func viewWillAppear(_ animated: Bool) {
-        if let location = placemark.location {
-            getWeather(location: location)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor.black
+        // Remove lines between tableview cells
+        //
+        tableView.separatorStyle = .none
+        
+        if let location = placemark.location {
+            getWeather(location: location)
+        }
+        
         dayLabel.text = DarkSkyWrapper.convertTimestampToDayName(seconds: weather.time)
+        dayLabel.font = UIFont.boldSystemFont(ofSize: 22)
         locationLabel.text = locationString
         sunsetImageView.image = #imageLiteral(resourceName: "SunsetImage")
         sunriseImageView.image = #imageLiteral(resourceName: "SunriseImage")
-        hiLabel.text = "Hi \(weather.highTemp.stringRepresentation ?? "")"
-        loLabel.text = "Lo \(weather.lowTemp.stringRepresentation ?? "")"
+        hiLabel.text = "Hi  \(weather.highTemp.stringRepresentation ?? "")"
+        loLabel.text = "Low \(weather.lowTemp.stringRepresentation ?? "")"
+        
+        let border = CALayer()
+        border.borderColor = UIColor.white.cgColor
+        border.frame = CGRect(x: 0, y: header.frame.size.height - 3, width: header.frame.size.width, height: 1.0)
+        border.borderWidth = CGFloat(2.0)
+        header.layer.addSublayer(border)
+        header.layer.masksToBounds = true
+        
+        headerTimeLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        headerCondLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        headerTempLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        headerPrecipLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        headerWindLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        // Use swipe to navigate the user back to the previous VC
+        //
+        let edgeSwipe = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.screenEdgeSwiped(recognizer:)))
+        edgeSwipe.edges = .left
+        view.addGestureRecognizer(edgeSwipe)
+    }
+    
+    // Swipe to navigate back
+    //
+    @objc func screenEdgeSwiped(recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .recognized {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func getWeather(location: CLLocation) {
@@ -84,7 +121,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.condImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: hourlyWeather[indexPath.row].iconName)
         cell.tempLabel.text = hourlyWeather[indexPath.row].temperature.stringRepresentation
         cell.precipLabel.text = hourlyWeather[indexPath.row].precipProbability.percentString
-        cell.windLabel.text = String(hourlyWeather[indexPath.row].windSpeed)
+        cell.windLabel.text = hourlyWeather[indexPath.row].windSpeed.windSpeedString
         
         cell.selectionStyle = .none
         

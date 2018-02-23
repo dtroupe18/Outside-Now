@@ -27,4 +27,18 @@ extension Double {
         let formattedString = formatter.string(from: NSNumber(value: self))
         return formattedString
     }
+    
+    var windSpeedString: String? {
+        // Rounds a Double and removes the trailing zeros from the string representation
+        // then we add MPH to the end
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 0
+        let formatedString = formatter.string(from: NSNumber(value: self))
+        if var string = formatedString {
+            string += " MPH"
+            return string
+        } else {
+            return nil
+        }
+    }
 }

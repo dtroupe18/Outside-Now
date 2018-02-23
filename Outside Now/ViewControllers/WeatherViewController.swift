@@ -33,7 +33,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("ViewWillAppear....")
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         if LocationWrapper.shared.canAccessLocation() {
             getPlacemark()
         }
@@ -187,7 +187,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         if indexPath.row != 0 && lastPlacemark != nil {
             // Subtract one becuase the tableview has a summary row at index 0
             //
-            selectedIndex = indexPath.row - 1
+            selectedIndex = indexPath.row
             self.performSegue(withIdentifier: "toDailyWeather", sender: nil)
         }
     }

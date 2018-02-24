@@ -10,6 +10,7 @@ import UIKit
 
 class WeeklySummaryCell: UITableViewCell {
 
+    @IBOutlet weak var weeklySummaryLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     
     override func awakeFromNib() {

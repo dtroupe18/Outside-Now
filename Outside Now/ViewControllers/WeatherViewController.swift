@@ -14,7 +14,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
-    @IBOutlet weak var alertLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var currentSummaryLabel: UILabel!
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var todayHiLabel: UILabel!
@@ -150,10 +150,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             // Show the weekly summary cell
             //
             let cell = tableView.dequeueReusableCell(withIdentifier: "weeklySummaryCell", for: indexPath) as! WeeklySummaryCell
+            
             if let summary = DarkSkyWrapper.shared.getWeeklySummary() {
+                cell.weeklySummaryLabel.textColor = UIColor.white
                 cell.summaryLabel.text = summary
-                cell.backgroundColor = UIColor.black
                 cell.summaryLabel.textColor = UIColor.white
+                // Double use for this cell
+                // It can display the weekly summary or the local weather alert
+                //
+                let alert = DarkSkyWrapper.shared.getAlerts()
+                if alert != "" {
+                    cell.summaryLabel.text = alert
+                    cell.weeklySummaryLabel.text = "Weather Alert"
+                    cell.summaryLabel.textColor = UIColor.red
+                    cell.weeklySummaryLabel.textColor = UIColor.red
+                }
+                cell.backgroundColor = UIColor.black
                 cell.selectionStyle = .none
             } else {
                 cell.isHidden = true
@@ -199,6 +211,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 print(err.localizedDescription)
             } else if let p = placemark {
                 if self.shouldRefreshWeather(placemark: p) {
+                    // Update the timestamp everytime the weather is refreshed
+                    //
+                    self.lastTimestamp = Date().millisecondsSinceEpoch
                     CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
                     self.parsePlacemark(placemark: p)
                 } else {
@@ -290,20 +305,25 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     
     func displayCurrentConditions() {
         if !weatherArray.isEmpty {
-            
-            let alert = DarkSkyWrapper.shared.getAlerts()
-            if alert != "" {
-                alertLabel.text = alert
-            }
+            let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)]
             
             if let currentTemp = weatherArray[0].currentTemp?.stringRepresentation {
                 currentTempLabel.text = "\(currentTemp)°"
             }
+            
             if let hi = weatherArray[0].highTemp.stringRepresentation {
-                todayHiLabel.text = "\(hi)"
+                let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
+                let attributedHiTemp = NSMutableAttributedString(string: "\(hi)°")
+                attributedHi.append(attributedHiTemp)
+
+                todayHiLabel.attributedText = attributedHi
             }
             if let lo = weatherArray[0].lowTemp.stringRepresentation {
-                todayLowLabel.text = "\(lo)"
+                let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
+                let attributedLowTemp = NSMutableAttributedString(string: "\(lo)°")
+                attributedLow.append(attributedLowTemp)
+                
+                todayLowLabel.attributedText = attributedLow
             }
             currentSummaryLabel.text = weatherArray[0].summary
         }   

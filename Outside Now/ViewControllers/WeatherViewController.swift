@@ -365,7 +365,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             if let vc = segue.destination as? DayViewController {
                 vc.locationString = locationLabel.text
                 if selectedIndex != -1 {
-                    vc.weather = weatherArray[selectedIndex]
+                    vc.weatherArray = weatherArray
+                    vc.currentIndex = selectedIndex
                 }
                 if let placemark = lastPlacemark {
                     vc.placemark = placemark

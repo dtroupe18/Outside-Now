@@ -13,6 +13,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var dailySummaryLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var sunriseImageView: UIImageView!
     @IBOutlet weak var sunsetImageView: UIImageView!
@@ -30,10 +31,16 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var headerPrecipLabel: UILabel!
     @IBOutlet weak var headerWindLabel: UILabel!
     
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var previousButton: UIButton!
+    
     var placemark: CLPlacemark!
-    var weather: Weather!
+    var weatherArray: [Weather]!
+    var currentIndex: Int = -1
     var locationString: String!
     
+    // Hourly weather for the current day
+    //
     var hourlyWeather = [HourlyWeather]()
     
     override func viewDidLoad() {
@@ -45,36 +52,18 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //
         tableView.separatorStyle = .none
         
-        if let location = placemark.location {
-            getWeather(location: location)
-        }
+        updateView()
         
-        dayLabel.text = DarkSkyWrapper.convertTimestampToDayName(seconds: weather.time)
-        dayLabel.font = UIFont.boldSystemFont(ofSize: 22)
         locationLabel.text = locationString
         sunsetImageView.image = #imageLiteral(resourceName: "SunsetImage")
         sunriseImageView.image = #imageLiteral(resourceName: "SunriseImage")
-        
-        // Make "Hi: & Low: bold on their labels
-        //
-        let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)]
-        let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
-        let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
-        let attributedHiTemp = NSMutableAttributedString(string: "\(weather.highTemp.stringRepresentation ?? "")°")
-        let attributedLowTemp = NSMutableAttributedString(string: "\(weather.lowTemp.stringRepresentation ?? "")°")
-        
-        attributedHi.append(attributedHiTemp)
-        attributedLow.append(attributedLowTemp)
-    
-        hiLabel.attributedText = attributedHi
-        loLabel.attributedText = attributedLow
         
         // Add a dividing line at the bottom of the headerView
         //
         let border = CALayer()
         border.borderColor = UIColor.white.cgColor
         border.frame = CGRect(x: 0, y: header.frame.size.height - 3, width: header.frame.size.width, height: 1.0)
-        border.borderWidth = CGFloat(2.0)
+        border.borderWidth = CGFloat(1.0)
         header.layer.addSublayer(border)
         header.layer.masksToBounds = true
         
@@ -93,23 +82,73 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func getWeather(location: CLLocation) {
-        if let formattedTime = weather.getFormattedTime() {
-            DarkSkyWrapper.shared.getFutureForecast(lat: location.coordinate.latitude, long: location.coordinate.longitude, formattedTime: formattedTime, completionHandler: { (summary, hourlyArray, error) in
+    @IBAction func nextPressed(_ sender: Any) { 
+        // Get the daily forecast for the next day and update the view
+        //
+        if currentIndex + 1 < weatherArray.count {
+            currentIndex += 1
+            updateView()
+        }
+    }
+    
+    @IBAction func previousPressed(_ sender: Any) {
+        if currentIndex - 1 >= 0 {
+            currentIndex -= 1
+            updateView()
+        }
+    }
+    
+    func getWeather(location: CLLocation, time: String) {
+        DarkSkyWrapper.shared.getFutureForecast(lat: location.coordinate.latitude, long: location.coordinate.longitude, formattedTime: time, completionHandler: { (summary, hourlyArray, error) in
+            
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            if let dailySummary = summary, let hourlyWeatherArray = hourlyArray {
+                self.summaryLabel.text = dailySummary.summary
+                self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunriseTime)
+                self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunsetTime)
                 
-                if let err = error {
-                    print(err.localizedDescription)
-                }
-                
-                if let dailySummary = summary, let hourlyWeatherArray = hourlyArray {
-                    self.summaryLabel.text = dailySummary.summary
-                    self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunriseTime)
-                    self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunsetTime)
-                    
-                    self.hourlyWeather = hourlyWeatherArray
-                    self.tableView.reloadData()
-                }
-            })
+                self.hourlyWeather = hourlyWeatherArray
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    // Update everything related to weather data
+    //
+    func updateView() {
+        if currentIndex >= 0 && currentIndex < weatherArray.count {
+            CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
+            let weather = weatherArray[currentIndex]
+            
+            // Get the weather
+            //
+            if let location = placemark.location, let time = weather.getFormattedTime() {
+                getWeather(location: location, time: time)
+            }
+            
+            let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time)
+            dayLabel.text = dateString
+            
+            // Make "High & Low bold on their labels
+            //
+            let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)]
+            let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
+            let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
+            let attributedHiTemp = NSMutableAttributedString(string: "\(weather.highTemp.stringRepresentation ?? "")°")
+            let attributedLowTemp = NSMutableAttributedString(string: "\(weather.lowTemp.stringRepresentation ?? "")°")
+            
+            attributedHi.append(attributedHiTemp)
+            attributedLow.append(attributedLowTemp)
+            
+            hiLabel.attributedText = attributedHi
+            loLabel.attributedText = attributedLow
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+                CustomActivityIndicator.shared.hideActivityIndicator(uiView: self.view)
+            }
         }
     }
     
@@ -137,7 +176,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

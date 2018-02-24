@@ -69,18 +69,14 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         hiLabel.attributedText = attributedHi
         loLabel.attributedText = attributedLow
         
+        // Add a dividing line at the bottom of the headerView
+        //
         let border = CALayer()
         border.borderColor = UIColor.white.cgColor
         border.frame = CGRect(x: 0, y: header.frame.size.height - 3, width: header.frame.size.width, height: 1.0)
         border.borderWidth = CGFloat(2.0)
         header.layer.addSublayer(border)
         header.layer.masksToBounds = true
-        
-        headerTimeLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        headerCondLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        headerTempLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        headerPrecipLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        headerWindLabel.font = UIFont.boldSystemFont(ofSize: 16)
         
         // Use swipe to navigate the user back to the previous VC
         //
@@ -131,7 +127,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         cell.timeLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: hourlyWeather[indexPath.row].time)
         cell.condImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: hourlyWeather[indexPath.row].iconName)
-        cell.tempLabel.text = hourlyWeather[indexPath.row].temperature.stringRepresentation
+        cell.tempLabel.text = "\(hourlyWeather[indexPath.row].temperature.stringRepresentation ?? "")°"
         cell.precipLabel.text = hourlyWeather[indexPath.row].precipProbability.percentString
         cell.windLabel.text = hourlyWeather[indexPath.row].windSpeed.windSpeedString
         cell.selectionStyle = .none

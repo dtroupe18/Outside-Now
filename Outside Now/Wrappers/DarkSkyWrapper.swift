@@ -225,7 +225,10 @@ class DarkSkyWrapper {
         // Converts seconds to the string day of the week plus date ex: "Sat 24"
         //
         let date = Date(timeIntervalSince1970: seconds)
-        let format = "EE d"
+        // format is full day string, abbreviated month, two digit day
+        // Ex: "Monday Feb 26"
+        //
+        let format = "EEEE MMM d"
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: date)

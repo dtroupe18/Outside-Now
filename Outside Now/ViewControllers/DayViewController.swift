@@ -160,19 +160,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func scrollTableViewToCurrentHour() {
-        var hour = Calendar.current.component(.hour, from: Date())
-        print("hour: \(hour)")
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh a"
-        let hourString = formatter.string(from: Date())
-        if hour == 12 && hourString.contains("AM") {
-            hour = 0
-        } else if hourString.contains("PM") {
-            hour += 12
-        }
-        
-        print("adjusted hour: \(hour)")
-        
+        let hour = Calendar.current.component(.hour, from: Date())
         let indexPath = IndexPath(row: hour, section: 0)
         tableView.scrollToRow(at: indexPath, at: .top, animated: false)
     }

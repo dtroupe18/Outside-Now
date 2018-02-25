@@ -102,9 +102,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         DarkSkyWrapper.shared.getFutureForecast(lat: location.coordinate.latitude, long: location.coordinate.longitude, formattedTime: time, completionHandler: { (summary, hourlyArray, error) in
             
             if let err = error {
-                if let topVC = UIApplication.topViewController() {
-                    Helper.showAlertMessage(vc: topVC, title: "Error", message: err.localizedDescription)
-                }
+                self.showAlert(title: "Error", message: err.localizedDescription)
             }
             
             if let dailySummary = summary, let hourlyWeatherArray = hourlyArray {
@@ -136,7 +134,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time)
             dayLabel.text = dateString
             
-            // Make "High & Low bold on their labels
+            // Make "High" & "Low" bold on their labels
             //
             let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)]
             let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)

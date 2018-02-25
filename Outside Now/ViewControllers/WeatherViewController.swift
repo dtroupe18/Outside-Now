@@ -9,9 +9,9 @@
 import UIKit
 import CoreLocation
 
-class WeatherViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class WeatherViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchbar: UISearchBar!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
@@ -51,7 +51,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         collectionView.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
-        searchTextField.delegate = self
+        searchbar.delegate = self
         
         if let flow = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let width = UIScreen.main.bounds.width
@@ -62,7 +62,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             flow.itemSize = CGSize(width: width / 5, height: height)
         }
         
+        // SearchBar text color
+        //
+        let textFieldInsideSearchBar = searchbar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        
         collectionView.layer.borderWidth = 1
+        collectionView.layer.cornerRadius = 8
         collectionView.layer.borderColor = UIColor.lightGray.cgColor
         collectionView.backgroundColor = UIColor.black
 
@@ -82,7 +88,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             if LocationWrapper.shared.authStatus != .denied {
                 LocationWrapper.shared.locationManager.requestWhenInUseAuthorization()
             } else {
-                showAlert(title: "Location Access Denied", message: "Without access to your location outside now can only provide weather if your search for a location. You can update location access in settings.")
+                showAlert(title: "Location Access Denied", message: "Without access to your location Outside Now can only provide weather if your search for a location. You can update location access in settings.")
             }
         }
     }
@@ -92,7 +98,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         LocationWrapper.shared.authStatus = status
         if status == .denied {
-            showAlert(title: "Location Access Denied", message: "Without access to your location outside now can only provide weather if your search for a location. You can update location access in settings.")
+            showAlert(title: "Location Access Denied", message: "Without access to your location Outside Now can only provide weather if your search for a location. You can update location access in settings.")
         } else if status == .authorizedAlways || status == .authorizedWhenInUse {
             // Get the users location and then the weather
             //
@@ -206,9 +212,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     func getPlacemark() {
         LocationWrapper.shared.getPlaceMark(completion: { placemark, error in
             if let err = error {
-                if let topVC = UIApplication.topViewController() {
-                    Helper.showAlertMessage(vc: topVC, title: "Error", message: err.localizedDescription)
-                }
+                self.showAlert(title: "Error", message: err.localizedDescription)
             } else if let p = placemark {
                 if self.shouldRefreshWeather(placemark: p) {
                     // Update the timestamp everytime the weather is refreshed
@@ -219,7 +223,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 } else {
                     // Do nothing
                     //
-                   // print("Not refreshing weather")
                 }
             }
         })
@@ -300,10 +303,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         DarkSkyWrapper.shared.getForecast(lat: latitude, long: longitude, completionHandler: { weatherArray, hourlyArray, error in
             
             if error != nil {
-                if let topVC = UIApplication.topViewController() {
-                    Helper.showAlertMessage(vc: topVC, title: "Error", message: error!.localizedDescription)
-                }
+                self.showAlert(title: "Error", message: error!.localizedDescription)
             }
+            
             if let weather = weatherArray {
                 self.weatherArray = weather
                 self.tableView.reloadData()
@@ -317,7 +319,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 print("hourlyWeather = nil")
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
                 CustomActivityIndicator.shared.hideActivityIndicator(uiView: self.view)
             }
         })
@@ -349,24 +351,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         }   
     }
     
-    // Marker: TextView Delegate
+    // Marker: SearchBar Delegate
     //
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        guard let text = textField.text else { return true }
-        textField.text = ""
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
+        searchbar.resignFirstResponder()
+        guard let text = searchbar.text else { return }
+        searchbar.text = ""
         LocationWrapper.shared.searchForPlacemark(text: text, completion: { placemark, error in
             if let err = error {
-                if let topVC = UIApplication.topViewController() {
-                    Helper.showAlertMessage(vc: topVC, title: "Error", message: err.localizedDescription)
-                }
+                CustomActivityIndicator.shared.hideActivityIndicator(uiView: self.view)
+                self.showAlert(title: "Error", message: err.localizedDescription)
             }
             if let p = placemark {
-                CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
                 self.parsePlacemark(placemark: p)
             }
         })
-        return true
     }
     
     @IBAction func darkSkyButtonPressed(_ sender: Any) {

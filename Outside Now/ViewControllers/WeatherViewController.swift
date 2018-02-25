@@ -22,8 +22,17 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
+    
     var lastPlacemark: CLPlacemark?
+    
+    // Flag used to determine when you refresh the weather data
+    //
     var lastTimestamp: Int64?
+    
+    // Save the timezone so the timestamps can be converted to their local time
+    // if the user searches for a location in another timeZone.
+    //
+    var requestTimeZone: String?
     
     var weatherArray = [Weather]()
     var hourlyWeather = [HourlyWeather]()
@@ -125,7 +134,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         if let precipPercent = hourlyWeather[indexPath.row].precipProbability.percentString {
             cell.precipLabel.text = precipPercent
         }
-        cell.hourLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: hourlyWeather[indexPath.row].time)
+        cell.hourLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: hourlyWeather[indexPath.row].time, timeZone: lastPlacemark?.timeZone)
         cell.tempLabel.textColor = UIColor.white
         cell.precipLabel.textColor = UIColor.white
         cell.hourLabel.textColor = UIColor.white
@@ -229,21 +238,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     func shouldRefreshWeather(placemark: CLPlacemark) -> Bool {
-        // If the placemark is new or enough time has passed (15 minutes) we can
-        // refresh the weather data. This function also updates the value stored in
-        // last placemark
+        // If enough time has passed (15 minutes) we refresh the weather data.
         //
         if self.lastPlacemark == nil {
-            // Save the last place we got the weather for
+            // Initial request
             //
-            self.lastPlacemark = placemark
-            self.lastTimestamp = Date().millisecondsSinceEpoch
             return true
+            // User could have changed their location before 15 minutes have passed
+            //
         } else if fifteenMinutesSinceLastRequest() {
             return true
         } else {
             return false
         }
+        // Note that searches are run checked with this function they always
+        // result in a new weather request
+        //
     }
     
     func fifteenMinutesSinceLastRequest() -> Bool {
@@ -260,19 +270,25 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         }
     }
     
+    // Not being used
+    //
     func isNewCity(placemark: CLPlacemark) -> Bool {
-        guard let newCity = placemark.locality, let oldCity = lastPlacemark?.locality else { return false }
-        if newCity != oldCity {
-            return true
-        } else {
+        guard let newCity = placemark.locality, let oldCity = lastPlacemark?.locality else { return true }
+        if newCity == oldCity {
             return false
+        } else {
+            return true
         }
     }
     
     func parsePlacemark(placemark: CLPlacemark) {
         guard let location = placemark.location else { return }
+        // Update lastPlacemark everytime a new one is parsed
+        //
+        self.lastPlacemark = placemark
         getWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         setLocationLabel(placemark: placemark)
+        
     }
     
     func setLocationLabel(placemark: CLPlacemark) {

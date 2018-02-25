@@ -187,23 +187,29 @@ class DarkSkyWrapper {
         return newImage
     }
     
-    static func convertTimestampToHour(seconds: Double) -> String {
+    static func convertTimestampToHour(seconds: Double, timeZone: TimeZone?) -> String {
         // Convert seconds to a string representing that hour
         //
         let date = Date(timeIntervalSince1970: seconds)
         let formatter = DateFormatter()
         // "a" prints "pm" or "am"
         //
+        if let zone = timeZone {
+            formatter.timeZone = zone
+        }
         formatter.dateFormat = "h a"
         let hourString = formatter.string(from: date)
         return hourString
     }
     
-    static func convertTimestampToHourMin(seconds: Double) -> String {
+    static func convertTimestampToHourMin(seconds: Double, timeZone: TimeZone?) -> String {
         // Convert seconds to a string representing that hour
         //
         let date = Date(timeIntervalSince1970: seconds)
         let formatter = DateFormatter()
+        if let zone = timeZone {
+            formatter.timeZone = zone
+        }
         // "a" prints "pm" or "am"
         //
         formatter.dateFormat = "h:mm a"

@@ -108,11 +108,15 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             if let dailySummary = summary, let hourlyWeatherArray = hourlyArray {
                 DispatchQueue.main.async {
                     self.summaryLabel.text = dailySummary.summary
-                    self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunriseTime)
-                    self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunsetTime)
+                    self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunriseTime, timeZone: self.placemark.timeZone)
+                    self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunsetTime, timeZone: self.placemark.timeZone)
                     
                     self.hourlyWeather = hourlyWeatherArray
                     self.tableView.reloadData()
+                    if self.currentIndex > 0 {
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                    }
                 }
             }
         })
@@ -161,12 +165,19 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func scrollTableViewToCurrentHour() {
-        let hour = Calendar.current.component(.hour, from: Date())
+        var calendar = Calendar.current
+        // use the correct timeZone
+        //
+        if let zone = placemark.timeZone {
+            calendar.timeZone = zone
+        }
+        let hour = calendar.component(.hour, from: Date())
         let indexPath = IndexPath(row: hour, section: 0)
         tableView.scrollToRow(at: indexPath, at: .top, animated: false)
     }
     
     // Marker: Tableview Delegate
+    //
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -178,7 +189,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "enhancedHourlyCell", for: indexPath) as! HourlyTableViewCell
         
-        cell.timeLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: hourlyWeather[indexPath.row].time)
+        cell.timeLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: hourlyWeather[indexPath.row].time, timeZone: placemark.timeZone)
         cell.condImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: hourlyWeather[indexPath.row].iconName)
         cell.tempLabel.text = "\(hourlyWeather[indexPath.row].temperature.stringRepresentation ?? "")°"
         cell.precipLabel.text = hourlyWeather[indexPath.row].precipProbability.percentString

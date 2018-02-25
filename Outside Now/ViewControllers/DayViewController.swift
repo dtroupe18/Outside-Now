@@ -53,7 +53,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.separatorStyle = .none
         
         updateView()
-        
+         
         locationLabel.text = locationString
         sunsetImageView.image = #imageLiteral(resourceName: "SunsetImage")
         sunriseImageView.image = #imageLiteral(resourceName: "SunriseImage")

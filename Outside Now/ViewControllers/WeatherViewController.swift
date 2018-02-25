@@ -16,7 +16,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var currentSummaryLabel: UILabel!
-    @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var todayHiLabel: UILabel!
     @IBOutlet weak var todayLowLabel: UILabel!
     @IBOutlet weak var darkSkyButton: UIButton!
@@ -45,7 +44,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         // Refresh notification
         //
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
         
         self.hideKeyboardWhenTappedAround()
         LocationWrapper.shared.locationManager.delegate = self

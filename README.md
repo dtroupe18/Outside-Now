@@ -28,5 +28,5 @@
 
 ## Sample ScreenShot
 
-![Alt Text](https://github.com/dtroupe18/Outside-Now/blob/master/Samples/First.jpg)
+![Alt Text](https://github.com/dtroupe18/Outside-Now/blob/master/Samples/One.jpg)
 

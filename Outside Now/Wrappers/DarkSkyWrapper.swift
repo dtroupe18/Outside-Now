@@ -21,28 +21,44 @@ class DarkSkyWrapper {
     func getFutureForecast(lat: Double, long: Double, formattedTime: String, completionHandler: @escaping (DailySummary?, [HourlyWeather]?, Error?) ->()) {
         if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
             DispatchQueue.global(qos: .utility).async {
-                
-                Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)").responseJSON(completionHandler: { (responseData) -> Void in
-                    
-                    if let error = responseData.result.error as? AFError {
-                        let err = NSError(domain: "Future Weather Request Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "\(error.localizedDescription)"])
-                        completionHandler(nil, nil, err)
-                    }
-                    else if responseData.result.value != nil {
-                        let json = JSON(responseData.result.value!)
-                        // Get summary, sunrise, sunset time
-                        //
-                        let dailySummary = DailySummary(fullJson: json)
-                        // Get hourly weather for that day
-                        //
-                        var hourlyWeatherArray = [HourlyWeather]()
-                        for hour in json["hourly"]["data"].arrayValue {
-                            let hourlyWeather = HourlyWeather(json: hour)
-                            hourlyWeatherArray.append(hourlyWeather)
+                if self.responses["\(lat)\(long)\(formattedTime)"] == nil {
+                    Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)").responseJSON(completionHandler: { (responseData) -> Void in
+                        
+                        if let error = responseData.result.error as? AFError {
+                            let err = NSError(domain: "Future Weather Request Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "\(error.localizedDescription)"])
+                            completionHandler(nil, nil, err)
                         }
-                        completionHandler(dailySummary, hourlyWeatherArray, nil)
+                        else if responseData.result.value != nil {
+                            let json = JSON(responseData.result.value!)
+                            self.responses["\(lat)\(long)\(formattedTime)"] = json
+                            
+                            // Get summary, sunrise, sunset time
+                            //
+                            let dailySummary = DailySummary(fullJson: json)
+                            // Get hourly weather for that day
+                            //
+                            var hourlyWeatherArray = [HourlyWeather]()
+                            for hour in json["hourly"]["data"].arrayValue {
+                                let hourlyWeather = HourlyWeather(json: hour)
+                                hourlyWeatherArray.append(hourlyWeather)
+                            }
+                            completionHandler(dailySummary, hourlyWeatherArray, nil)
+                        }
+                    })
+                }
+                else if let json = self.responses["\(lat)\(long)\(formattedTime)"] {
+                    // Get summary, sunrise, sunset time
+                    //
+                    let dailySummary = DailySummary(fullJson: json)
+                    // Get hourly weather for that day
+                    //
+                    var hourlyWeatherArray = [HourlyWeather]()
+                    for hour in json["hourly"]["data"].arrayValue {
+                        let hourlyWeather = HourlyWeather(json: hour)
+                        hourlyWeatherArray.append(hourlyWeather)
                     }
-                })
+                    completionHandler(dailySummary, hourlyWeatherArray, nil)
+                }
             }
         }
     }
@@ -50,6 +66,9 @@ class DarkSkyWrapper {
     func getForecast(lat: Double, long: Double, completionHandler: @escaping ([Weather]?, [HourlyWeather]?, Error?) -> ()) {
         if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
             DispatchQueue.global(qos: .utility).async {
+                // new location or refreshed weather data so we can clear responses
+                //
+                self.responses.removeAll()
                 Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long)").responseJSON { (responseData) -> Void in
                     
                     if let error = responseData.result.error as? AFError {

@@ -102,16 +102,20 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         DarkSkyWrapper.shared.getFutureForecast(lat: location.coordinate.latitude, long: location.coordinate.longitude, formattedTime: time, completionHandler: { (summary, hourlyArray, error) in
             
             if let err = error {
-                print(err.localizedDescription)
+                if let topVC = UIApplication.topViewController() {
+                    Helper.showAlertMessage(vc: topVC, title: "Error", message: err.localizedDescription)
+                }
             }
             
             if let dailySummary = summary, let hourlyWeatherArray = hourlyArray {
-                self.summaryLabel.text = dailySummary.summary
-                self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunriseTime)
-                self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunsetTime)
-                
-                self.hourlyWeather = hourlyWeatherArray
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.summaryLabel.text = dailySummary.summary
+                    self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunriseTime)
+                    self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunsetTime)
+                    
+                    self.hourlyWeather = hourlyWeatherArray
+                    self.tableView.reloadData()
+                }
             }
         })
     }

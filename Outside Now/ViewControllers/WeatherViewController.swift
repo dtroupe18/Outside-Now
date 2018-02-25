@@ -208,7 +208,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     func getPlacemark() {
         LocationWrapper.shared.getPlaceMark(completion: { placemark, error in
             if let err = error {
-                print(err.localizedDescription)
+                if let topVC = UIApplication.topViewController() {
+                    Helper.showAlertMessage(vc: topVC, title: "Error", message: err.localizedDescription)
+                }
             } else if let p = placemark {
                 if self.shouldRefreshWeather(placemark: p) {
                     // Update the timestamp everytime the weather is refreshed
@@ -269,12 +271,30 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     func parsePlacemark(placemark: CLPlacemark) {
         guard let location = placemark.location else { return }
         getWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        setLocationLabel(city: placemark.locality, state: placemark.administrativeArea)
+        setLocationLabel(placemark: placemark)
     }
     
-    func setLocationLabel(city: String?, state: String?) {
-        if let city = city, let state = state {
-            locationLabel.text = "\(city), \(state)"
+    func setLocationLabel(placemark: CLPlacemark) {
+        let city = placemark.locality
+        let state = placemark.administrativeArea
+        let country = placemark.country
+        
+        if city != nil && state != nil {
+            locationLabel.text = "\(city!), \(state!)"
+        } else if city != nil && country != nil {
+            locationLabel.text = "\(city!), \(country!)"
+        } else if state != nil && country != nil {
+            locationLabel.text = "\(state!), \(country!)"
+        } else if city != nil {
+            locationLabel.text = "\(city!)"
+        } else if state != nil {
+            locationLabel.text = "\(state!)"
+        } else if country != nil {
+            locationLabel.text = "\(country!)"
+        } else {
+            // Stranger Things Easter Egg
+            //
+            locationLabel.text = "Hawkins, IN"
         }
     }
     
@@ -282,7 +302,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         DarkSkyWrapper.shared.getForecast(lat: latitude, long: longitude, completionHandler: { weatherArray, hourlyArray, error in
             
             if error != nil {
-                print("Error: \(error!)")
+                if let topVC = UIApplication.topViewController() {
+                    Helper.showAlertMessage(vc: topVC, title: "Error", message: error!.localizedDescription)
+                }
             }
             if let weather = weatherArray {
                 self.weatherArray = weather
@@ -337,7 +359,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         textField.text = ""
         LocationWrapper.shared.searchForPlacemark(text: text, completion: { placemark, error in
             if let err = error {
-                print(err.localizedDescription)
+                if let topVC = UIApplication.topViewController() {
+                    Helper.showAlertMessage(vc: topVC, title: "Error", message: err.localizedDescription)
+                }
             }
             if let p = placemark {
                 CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)

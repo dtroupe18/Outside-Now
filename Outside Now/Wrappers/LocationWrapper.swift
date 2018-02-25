@@ -36,7 +36,6 @@ class LocationWrapper {
     }
     
     func requestAccess() {
-        print("Request Acess in LocationWrapper called")
         if authStatus == .denied {
             // We cannot ask the user again so we just want to alert them
             //

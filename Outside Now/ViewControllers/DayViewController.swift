@@ -136,6 +136,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 dayLabel.text = dateString
             } else if currentIndex == 0 {
                 dayLabel.text = "Today"
+                scrollTableViewToCurrentHour()
             }
             
             // Make "High" & "Low" bold on their labels
@@ -156,6 +157,24 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 CustomActivityIndicator.shared.hideActivityIndicator(uiView: self.view)
             }
         }
+    }
+    
+    func scrollTableViewToCurrentHour() {
+        var hour = Calendar.current.component(.hour, from: Date())
+        print("hour: \(hour)")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh a"
+        let hourString = formatter.string(from: Date())
+        if hour == 12 && hourString.contains("AM") {
+            hour = 0
+        } else if hourString.contains("PM") {
+            hour += 12
+        }
+        
+        print("adjusted hour: \(hour)")
+        
+        let indexPath = IndexPath(row: hour, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
     }
     
     // Marker: Tableview Delegate

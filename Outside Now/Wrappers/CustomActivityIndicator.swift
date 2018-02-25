@@ -11,7 +11,7 @@ import UIKit
 
 class CustomActivityIndicator {
     
-    // we need to make this a singleton in order for
+    // Need to make this class a singleton in order for
     // the same views to be added and removed each time
     //
     static let shared = CustomActivityIndicator()
@@ -42,7 +42,6 @@ class CustomActivityIndicator {
             self.activityIndicator.startAnimating()
         }
     }
-    
     
     // Hide activity indicator
     // Actually remove activity indicator from its super view

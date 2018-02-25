@@ -131,8 +131,12 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 getWeather(location: location, time: time)
             }
             
-            let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time)
-            dayLabel.text = dateString
+            if currentIndex > 0 {
+                let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time)
+                dayLabel.text = dateString
+            } else if currentIndex == 0 {
+                dayLabel.text = "Today"
+            }
             
             // Make "High" & "Low" bold on their labels
             //

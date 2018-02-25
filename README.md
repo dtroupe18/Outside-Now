@@ -1,4 +1,4 @@
-# Outside-Now is a simple weather app that allows you to get the current weather, hourly weather for the next 48 hours and an 8-day forecast at the same time
+# Outside-Now is a simple weather app that allows you to get the current weather, hourly weather for the next 48 hours, and an 8-day forecast at the same time
 
 ## [App Store Link](https://itunes.apple.com/us/app/outsidenow/id1329825045?mt=8)
 

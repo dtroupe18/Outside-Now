@@ -135,7 +135,8 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time)
                 dayLabel.text = dateString
             } else if currentIndex == 0 {
-                dayLabel.text = "Today"
+                let monthDayString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time, fullString: false)
+                dayLabel.text = "Today\n\(monthDayString)"
                 scrollTableViewToCurrentHour()
             }
             

@@ -172,8 +172,15 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             calendar.timeZone = zone
         }
         let hour = calendar.component(.hour, from: Date())
-        let indexPath = IndexPath(row: hour, section: 0)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        // Make sure we can scroll to this index
+        //
+        if 0...tableView.numberOfRows(inSection: 0) ~= hour {
+            let indexPath = IndexPath(row: hour, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        } else {
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        }
     }
     
     // Marker: Tableview Delegate

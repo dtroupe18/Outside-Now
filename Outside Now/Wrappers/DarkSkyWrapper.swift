@@ -6,7 +6,6 @@
 //  Copyright © 2018 High Tree Development. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -133,10 +132,14 @@ class DarkSkyWrapper {
         case "clear-day":
             return #imageLiteral(resourceName: "clear-day")
         case "clear-night":
+            // Account for moon phase
+            //
             return #imageLiteral(resourceName: "clear-night")
         case "partly-cloudy-day":
             return #imageLiteral(resourceName: "partly-cloudy-day")
         case "partly-cloudy-night":
+            // Account for moon phase
+            //
             return #imageLiteral(resourceName: "partly-cloudy-night")
         case "cloudy":
             return #imageLiteral(resourceName: "cloudy")

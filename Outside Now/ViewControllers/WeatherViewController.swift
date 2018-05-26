@@ -12,6 +12,7 @@ import CoreLocation
 class WeatherViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var searchbar: UISearchBar!
+    @IBOutlet weak var notificationButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
@@ -383,6 +384,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 self.parsePlacemark(placemark: p)
             }
         })
+    }
+    
+    
+    @IBAction func notificationButtonPressed(_ sender: Any) {
+        // Go to notifications VC
+        //
+        self.performSegue(withIdentifier: "toNotifications", sender: nil)
     }
     
     @IBAction func darkSkyButtonPressed(_ sender: Any) {

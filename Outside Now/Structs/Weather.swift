@@ -18,6 +18,7 @@ struct Weather {
     let precipProbability: Double
     let summary: String
     let iconName: String
+    let moonPhase: Double
     let time: Double
     
     init(json: JSON) {
@@ -30,20 +31,22 @@ struct Weather {
         self.summary = json["summary"].stringValue
         self.iconName = json["icon"].stringValue
         self.time = json["time"].doubleValue
+        self.moonPhase = json["moonPhase"].doubleValue
     }
     
     init(fullJson: JSON) {
         // Takes the full response from DarkSky
         //
         self.currentTemp = fullJson["currently"]["temperature"].doubleValue
-        self.lowTemp = fullJson["daily"]["data"][0]["temperatureLow"].doubleValue
-        self.highTemp = fullJson["daily"]["data"][0]["temperatureHigh"].doubleValue
         self.precipProbability = fullJson["currently"]["precipProbability"].doubleValue
         self.windSpeed = fullJson["currently"]["windSpeed"].doubleValue
         self.iconName = fullJson["currently"]["icon"].stringValue
         self.time = fullJson["currently"]["time"].doubleValue
+        self.lowTemp = fullJson["daily"]["data"][0]["temperatureLow"].doubleValue
+        self.highTemp = fullJson["daily"]["data"][0]["temperatureHigh"].doubleValue
+        self.moonPhase = fullJson["daily"]["data"][0]["moonPhase"].doubleValue
         
-        // Hourly summary is a summary for all hours of the day
+        // Hourly summary is a summary for the current day
         //
         self.summary = fullJson["hourly"]["summary"].stringValue
         

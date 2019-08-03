@@ -10,7 +10,6 @@
 		39E228654068DBDD148E5C3B /* Pods_Outside_Now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA3ADDAB66DB827B66395C3 /* Pods_Outside_Now.framework */; };
 		5506399220350B3A00FFF284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506399120350B3A00FFF284 /* AppDelegate.swift */; };
 		5506399720350B3A00FFF284 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5506399520350B3A00FFF284 /* Main.storyboard */; };
-		5506399A20350B3A00FFF284 /* Outside_Now.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5506399820350B3A00FFF284 /* Outside_Now.xcdatamodeld */; };
 		5506399C20350B3A00FFF284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5506399B20350B3A00FFF284 /* Assets.xcassets */; };
 		5506399F20350B3A00FFF284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5506399D20350B3A00FFF284 /* LaunchScreen.storyboard */; };
 		550639B520350B3A00FFF284 /* Outside_NowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550639B420350B3A00FFF284 /* Outside_NowUITests.swift */; };
@@ -63,7 +62,6 @@
 		5506398E20350B3A00FFF284 /* Outside Now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Outside Now.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5506399120350B3A00FFF284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5506399620350B3A00FFF284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5506399920350B3A00FFF284 /* Outside_Now.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Outside_Now.xcdatamodel; sourceTree = "<group>"; };
 		5506399B20350B3A00FFF284 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5506399E20350B3A00FFF284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		550639A020350B3A00FFF284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				5506399B20350B3A00FFF284 /* Assets.xcassets */,
 				5506399D20350B3A00FFF284 /* LaunchScreen.storyboard */,
 				550639A020350B3A00FFF284 /* Info.plist */,
-				5506399820350B3A00FFF284 /* Outside_Now.xcdatamodeld */,
 				551E6DFC20350FE400455A3E /* Keys.plist */,
 			);
 			path = "Outside Now";
@@ -515,7 +512,6 @@
 				551E6DF620350E8A00455A3E /* LocationWrapper.swift in Sources */,
 				5555231420375C7500204E80 /* Date++Extension.swift in Sources */,
 				551E6DEE20350C9E00455A3E /* HourlyCell.swift in Sources */,
-				5506399A20350B3A00FFF284 /* Outside_Now.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -827,19 +823,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5506399820350B3A00FFF284 /* Outside_Now.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5506399920350B3A00FFF284 /* Outside_Now.xcdatamodel */,
-			);
-			currentVersion = 5506399920350B3A00FFF284 /* Outside_Now.xcdatamodel */;
-			path = Outside_Now.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5506398620350B3A00FFF284 /* Project object */;
 }

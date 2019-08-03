@@ -1,6 +1,0 @@
-framework module Pods_Outside_NowTests {
-  umbrella header "Pods-Outside NowTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -187,23 +187,29 @@ class DarkSkyWrapper {
         return newImage
     }
     
-    static func convertTimestampToHour(seconds: Double) -> String {
+    static func convertTimestampToHour(seconds: Double, timeZone: TimeZone?) -> String {
         // Convert seconds to a string representing that hour
         //
         let date = Date(timeIntervalSince1970: seconds)
         let formatter = DateFormatter()
         // "a" prints "pm" or "am"
         //
+        if let zone = timeZone {
+            formatter.timeZone = zone
+        }
         formatter.dateFormat = "h a"
         let hourString = formatter.string(from: date)
         return hourString
     }
     
-    static func convertTimestampToHourMin(seconds: Double) -> String {
+    static func convertTimestampToHourMin(seconds: Double, timeZone: TimeZone?) -> String {
         // Convert seconds to a string representing that hour
         //
         let date = Date(timeIntervalSince1970: seconds)
         let formatter = DateFormatter()
+        if let zone = timeZone {
+            formatter.timeZone = zone
+        }
         // "a" prints "pm" or "am"
         //
         formatter.dateFormat = "h:mm a"
@@ -221,14 +227,29 @@ class DarkSkyWrapper {
         return formatter.string(from: date)
     }
     
-    static func convertTimestampToDayDate(seconds: Double) -> String {
+    static func convertTimestampToDayDate(seconds: Double, fullString: Bool = true) -> String {
         // Converts seconds to the string day of the week plus date ex: "Sat 24"
         //
         let date = Date(timeIntervalSince1970: seconds)
-        let format = "EE d"
+        // format is full day string, full month, two digit day
+        // Ex: "Monday March 26"
+        //
+        let dayFormat = "EEEE"
         let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: date)
+        formatter.dateFormat = dayFormat
+        let dayString = formatter.string(from: date)
+        
+        let monthDayFormat = "MMMM d"
+        formatter.dateFormat = monthDayFormat
+        let monthDayString = formatter.string(from: date)
+        
+        if fullString {
+            return "\(dayString)\n\(monthDayString)"
+        } else {
+            // Return just the month and day for "Today" case in daily weather
+            //
+            return "\(monthDayString)"
+        }
     }
 }
 

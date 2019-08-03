@@ -31,7 +31,7 @@ class CustomActivityIndicator {
         loadingView.layer.cornerRadius = 10
         
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.style = .whiteLarge
         activityIndicator.center = CGPoint(x: loadingView.frame.width / 2, y: loadingView.frame.height / 2)
         activityIndicator.hidesWhenStopped = true
         

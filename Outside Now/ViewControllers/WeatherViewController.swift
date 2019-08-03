@@ -53,7 +53,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         
         // Refresh notification
         //
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         self.hideKeyboardWhenTappedAround()
         LocationWrapper.shared.locationManager.delegate = self
@@ -82,7 +82,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         collectionView.layer.borderColor = UIColor.lightGray.cgColor
         collectionView.backgroundColor = UIColor.black
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.backgroundColor = UIColor.black
         // Remove lines between tableview cells
@@ -343,7 +343,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     func displayCurrentConditions() {
-        let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)]
+        let attribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17)]
 
         guard let weatherForcast = forecast, let weatherArray = forecast?.daily.data else { return }
 
@@ -397,7 +397,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         // be placed in the app
         //
         if let url = URL(string: "https://darksky.net/poweredby/") {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
     }
     
@@ -431,4 +431,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         //
         NotificationCenter.default.removeObserver(self)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

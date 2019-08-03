@@ -154,9 +154,9 @@ final class DarkSkyWrapper {
         UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
         
         let textFontAttributes = [
-            NSAttributedStringKey.font: textFont,
-            NSAttributedStringKey.foregroundColor: textColor,
-            ] as [NSAttributedStringKey : Any]
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.foregroundColor: textColor,
+            ] as [NSAttributedString.Key : Any]
         image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
         
         let rect = CGRect(origin: point, size: image.size)

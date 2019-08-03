@@ -144,7 +144,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             
             // Make "High" & "Low" bold on their labels
             //
-            let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)]
+            let attribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
             let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
             let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
             let attributedHiTemp = NSMutableAttributedString(string: "\(weather.temperatureHigh.stringRepresentation ?? "")°")

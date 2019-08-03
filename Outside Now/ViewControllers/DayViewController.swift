@@ -35,7 +35,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var previousButton: UIButton!
     
     var placemark: CLPlacemark!
-    var forcast: Forecast!
+    var forcast: Forecast! // FIXME: use VM
     var currentIndex: Int = -1
     var locationString: String!
 
@@ -93,44 +93,23 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             updateView()
         }
     }
-    
-    func getWeather(location: CLLocation, time: String) {
-        DarkSkyWrapper.shared.getForecast(
-            lat: location.coordinate.latitude,
-            long: location.coordinate.longitude,
-            onSuccess: { forecast in
-                self.forcast = forecast
-                self.summaryLabel.text = forecast.daily.summary
-
-                // fullJson["daily"]["data"][0]["sunriseTime"].doubleValue
-                let sunriseTime = forecast.daily.data.first?.sunriseTime.asDouble ?? 0
-                let sunsetTime = forecast.daily.data.first?.sunsetTime.asDouble ?? 0
-
-                self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunriseTime, timeZone: self.placemark.timeZone)
-                self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunsetTime, timeZone: self.placemark.timeZone)
-
-                self.tableView.reloadData()
-
-                if self.currentIndex > 0 {
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-                }
-        }, onError: { error in
-            self.showAlert(title: "Error", message: error.localizedDescription)
-        })
-    }
-    
+        
     // Update everything related to weather data
     //
     func updateView() {
         if currentIndex >= 0 && currentIndex < forcast.daily.data.count {
-            CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
             let weather = forcast.daily.data[currentIndex]
-            
-            // Get the weather
-            //
-            if let location = placemark.location, let time = weather.formattedTimeString {
-                getWeather(location: location, time: time)
+            self.summaryLabel.text = weather.summary
+
+            let sunriseTime = weather.sunriseTime.asDouble
+            let sunsetTime = weather.sunsetTime.asDouble
+
+            self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunriseTime, timeZone: self.placemark.timeZone)
+            self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunsetTime, timeZone: self.placemark.timeZone)
+
+            if self.currentIndex > 0 {
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
             }
             
             if currentIndex > 0 {
@@ -155,10 +134,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             
             hiLabel.attributedText = attributedHi
             loLabel.attributedText = attributedLow
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-                CustomActivityIndicator.shared.hideActivityIndicator(uiView: self.view)
-            }
+            self.tableView.reloadData()
         }
     }
     

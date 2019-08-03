@@ -36,6 +36,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     var requestTimeZone: String?
 
     // FIXME: Use a viewModel.....
+    let networkClient = NetworkClient()
     var forecast: Forecast?
     var selectedIndex: Int = -1
     
@@ -324,7 +325,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     
     func getWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         // FIXME: Weak self oho
-        DarkSkyWrapper.shared.getForecast(lat: latitude, long: longitude, onSuccess: { forecast in
+        networkClient.getForecast(lat: latitude, long: longitude, onSuccess: { forecast in
             self.forecast = forecast
             self.tableView.reloadData() // zxc
             self.collectionView.reloadData()

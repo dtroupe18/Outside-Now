@@ -3,7 +3,6 @@ platform :ios, '13.0'
 
 target 'Outside Now' do
   use_frameworks!
-  pod 'Alamofire', '~> 4.5'
 
   # Pods for Outside Now
 

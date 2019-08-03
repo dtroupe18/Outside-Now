@@ -21,6 +21,7 @@
 		551E6DFD20350FE400455A3E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 551E6DFC20350FE400455A3E /* Keys.plist */; };
 		5522EE2822F604C200CAF52F /* ForecastResponseWithAlert.json in Resources */ = {isa = PBXBuildFile; fileRef = 5522EE2722F604C200CAF52F /* ForecastResponseWithAlert.json */; };
 		5522EE2A22F621B400CAF52F /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2922F621B400CAF52F /* Int+Utils.swift */; };
+		5522EE2D22F6317400CAF52F /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2C22F6317400CAF52F /* NetworkClient.swift */; };
 		5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */; };
 		55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555230F203662A200204E80 /* WeeklySummaryCell.swift */; };
 		55552312203662CF00204E80 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55552311203662CF00204E80 /* WeatherCell.swift */; };
@@ -78,6 +79,7 @@
 		551E6DFC20350FE400455A3E /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		5522EE2722F604C200CAF52F /* ForecastResponseWithAlert.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ForecastResponseWithAlert.json; sourceTree = "<group>"; };
 		5522EE2922F621B400CAF52F /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
+		5522EE2C22F6317400CAF52F /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
 		5555230F203662A200204E80 /* WeeklySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummaryCell.swift; sourceTree = "<group>"; };
 		55552311203662CF00204E80 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		5506399020350B3A00FFF284 /* Outside Now */ = {
 			isa = PBXGroup;
 			children = (
+				5522EE2B22F6316000CAF52F /* Network */,
 				551E6DEF20350CAC00455A3E /* Structs */,
 				551E6DEC20350C7A00455A3E /* Cells */,
 				551E6DE920350C4800455A3E /* Extensions */,
@@ -238,6 +241,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		5522EE2B22F6316000CAF52F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5522EE2C22F6317400CAF52F /* NetworkClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		55FB2F6622F5F9EE0002940C /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,7 +292,6 @@
 				5506398A20350B3A00FFF284 /* Sources */,
 				5506398B20350B3A00FFF284 /* Frameworks */,
 				5506398C20350B3A00FFF284 /* Resources */,
-				25ADDE06B94E0F0A3E54F760 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -415,24 +425,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		25ADDE06B94E0F0A3E54F760 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6A65E1C9B04E51641F8D5E1A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -494,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5522EE2D22F6317400CAF52F /* NetworkClient.swift in Sources */,
 				55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */,
 				55BA93DA203F364B002FD324 /* DayViewController.swift in Sources */,
 				55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */,

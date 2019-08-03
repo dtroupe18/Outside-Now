@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
 
 typealias ForecastCallback = (Forecast) -> Void
 typealias ErrorCallback = (Error) -> Void
@@ -16,8 +15,6 @@ typealias ErrorCallback = (Error) -> Void
 final class DarkSkyWrapper {
     
     static let shared = DarkSkyWrapper()
-    var response: JSON?
-    
     var responses = [String: [String: Any]]() // qwe make json a type alias
 
     private let path = Bundle.main.path(forResource: "Keys", ofType: "plist")!
@@ -94,19 +91,19 @@ final class DarkSkyWrapper {
         }
     }
 
-    func getWeeklySummary() -> String? {
-        if let json = response {
-            return json["daily"]["summary"].stringValue
-        }
-        return nil
-    }
-    
-    func getAlerts() -> String? {
-        if let json = response {
-            return json["alerts"]["title"].stringValue
-        }
-        return nil
-    }
+//    func getWeeklySummary() -> String? {
+//        if let json = response {
+//            return json["daily"]["summary"].stringValue
+//        }
+//        return nil
+//    }
+//
+//    func getAlerts() -> String? {
+//        if let json = response {
+//            return json["alerts"]["title"].stringValue
+//        }
+//        return nil
+//    }
     
     static func convertIconNameToImage(iconName: String) -> UIImage {
         switch iconName {

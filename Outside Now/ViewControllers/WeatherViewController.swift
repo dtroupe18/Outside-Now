@@ -167,21 +167,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             // Show the weekly summary cell
             //
             let cell = tableView.dequeueReusableCell(withIdentifier: "weeklySummaryCell", for: indexPath) as! WeeklySummaryCell
-            
-            if let summary = DarkSkyWrapper.shared.getWeeklySummary() {
+
+            if let summary = forecast?.daily.summary {
                 cell.weeklySummaryLabel.textColor = UIColor.white
                 cell.summaryLabel.text = summary
                 cell.summaryLabel.textColor = UIColor.white
+
                 // Double use for this cell
                 // It can display the weekly summary or the local weather alert
                 //
-                let alert = DarkSkyWrapper.shared.getAlerts()
-                if alert != "" {
-                    cell.summaryLabel.text = alert
+                if let alert = forecast?.alerts?.first {
+                    cell.summaryLabel.text = alert.alertDescription
                     cell.weeklySummaryLabel.text = "Weather Alert"
                     cell.summaryLabel.textColor = UIColor.red
                     cell.weeklySummaryLabel.textColor = UIColor.red
                 }
+
                 cell.backgroundColor = UIColor.black
                 cell.selectionStyle = .none
             } else {

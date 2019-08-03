@@ -35,14 +35,10 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var previousButton: UIButton!
     
     var placemark: CLPlacemark!
-    var weatherArray: [Weather]!
+    var forcast: Forecast!
     var currentIndex: Int = -1
     var locationString: String!
-    
-    // Hourly weather for the current day
-    //
-    var hourlyWeather = [HourlyWeather]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -85,7 +81,7 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func nextPressed(_ sender: Any) { 
         // Get the daily forecast for the next day and update the view
         //
-        if currentIndex + 1 < weatherArray.count {
+        if currentIndex + 1 < forcast.daily.data.count {
             currentIndex += 1
             updateView()
         }
@@ -99,47 +95,49 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func getWeather(location: CLLocation, time: String) {
-        DarkSkyWrapper.shared.getFutureForecast(lat: location.coordinate.latitude, long: location.coordinate.longitude, formattedTime: time, completionHandler: { (summary, hourlyArray, error) in
-            
-            if let err = error {
-                self.showAlert(title: "Error", message: err.localizedDescription)
-            }
-            
-            if let dailySummary = summary, let hourlyWeatherArray = hourlyArray {
-                DispatchQueue.main.async {
-                    self.summaryLabel.text = dailySummary.summary
-                    self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunriseTime, timeZone: self.placemark.timeZone)
-                    self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: dailySummary.sunsetTime, timeZone: self.placemark.timeZone)
-                    
-                    self.hourlyWeather = hourlyWeatherArray
-                    self.tableView.reloadData()
-                    if self.currentIndex > 0 {
-                        let indexPath = IndexPath(row: 0, section: 0)
-                        self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-                    }
+        DarkSkyWrapper.shared.getForecast(
+            lat: location.coordinate.latitude,
+            long: location.coordinate.longitude,
+            onSuccess: { forecast in
+                self.forcast = forecast
+                self.summaryLabel.text = forecast.daily.summary
+
+                // fullJson["daily"]["data"][0]["sunriseTime"].doubleValue
+                let sunriseTime = forecast.daily.data.first?.sunriseTime.asDouble ?? 0
+                let sunsetTime = forecast.daily.data.first?.sunsetTime.asDouble ?? 0
+
+                self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunriseTime, timeZone: self.placemark.timeZone)
+                self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunsetTime, timeZone: self.placemark.timeZone)
+
+                self.tableView.reloadData()
+
+                if self.currentIndex > 0 {
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
                 }
-            }
+        }, onError: { error in
+            self.showAlert(title: "Error", message: error.localizedDescription)
         })
     }
     
     // Update everything related to weather data
     //
     func updateView() {
-        if currentIndex >= 0 && currentIndex < weatherArray.count {
+        if currentIndex >= 0 && currentIndex < forcast.daily.data.count {
             CustomActivityIndicator.shared.showActivityIndicator(uiView: self.view)
-            let weather = weatherArray[currentIndex]
+            let weather = forcast.daily.data[currentIndex]
             
             // Get the weather
             //
-            if let location = placemark.location, let time = weather.getFormattedTime() {
+            if let location = placemark.location, let time = weather.formattedTimeString {
                 getWeather(location: location, time: time)
             }
             
             if currentIndex > 0 {
-                let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time)
+                let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time.asDouble)
                 dayLabel.text = dateString
             } else if currentIndex == 0 {
-                let monthDayString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time, fullString: false)
+                let monthDayString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time.asDouble, fullString: false)
                 dayLabel.text = "Today\n\(monthDayString)"
                 scrollTableViewToCurrentHour()
             }
@@ -149,8 +147,8 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)]
             let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
             let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
-            let attributedHiTemp = NSMutableAttributedString(string: "\(weather.highTemp.stringRepresentation ?? "")°")
-            let attributedLowTemp = NSMutableAttributedString(string: "\(weather.lowTemp.stringRepresentation ?? "")°")
+            let attributedHiTemp = NSMutableAttributedString(string: "\(weather.temperatureHigh.stringRepresentation ?? "")°")
+            let attributedLowTemp = NSMutableAttributedString(string: "\(weather.temperatureLow.stringRepresentation ?? "")°")
             
             attributedHi.append(attributedHiTemp)
             attributedLow.append(attributedLowTemp)
@@ -176,35 +174,24 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.scrollToRow(at: indexPath, at: .top, animated: false)
     }
     
-    // Marker: Tableview Delegate
-    //
+    // MARK: Tableview Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hourlyWeather.count
+        return forcast.hourly.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "enhancedHourlyCell", for: indexPath) as! HourlyTableViewCell
         
-        cell.timeLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: hourlyWeather[indexPath.row].time, timeZone: placemark.timeZone)
-        cell.condImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: hourlyWeather[indexPath.row].iconName)
-        cell.tempLabel.text = "\(hourlyWeather[indexPath.row].temperature.stringRepresentation ?? "")°"
-        cell.precipLabel.text = hourlyWeather[indexPath.row].precipProbability.percentString
-        cell.windLabel.text = hourlyWeather[indexPath.row].windSpeed.windSpeedString
+        cell.timeLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: forcast.hourly.data[indexPath.row].time.asDouble, timeZone: placemark.timeZone)
+        cell.condImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: forcast.hourly.data[indexPath.row].icon.rawValue)
+        cell.tempLabel.text = "\(forcast.hourly.data[indexPath.row].temperature.stringRepresentation ?? "")°"
+        cell.precipLabel.text = forcast.hourly.data[indexPath.row].precipProbability.percentString
+        cell.windLabel.text = forcast.hourly.data[indexPath.row].windSpeed.windSpeedString
         cell.selectionStyle = .none
         return cell
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    
 }

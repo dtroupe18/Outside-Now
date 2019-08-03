@@ -37,6 +37,7 @@ struct Alert: Codable {
 }
 
 // MARK: - Currently
+// FIXME: Rename this
 struct Currently: Codable {
     let apparentTemperature, pressure, precipIntensity: Double
     let time: Int
@@ -85,7 +86,7 @@ struct Daily: Codable {
     let data: [DailyData]
 }
 
-// MARK: - DailyDatum
+// MARK: - DailyData
 struct DailyData: Codable {
     let icon: IconName
     let windGustTime, temperatureLowTime: Int
@@ -112,6 +113,12 @@ struct DailyData: Codable {
     let uvIndex: Int
     let temperatureMin: Double
     let temperatureMaxTime: Int
+
+    var formattedTimeString: String? {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 0
+        return formatter.string(from: NSNumber(value: self.time))
+    }
 }
 
 // MARK: - Flags
@@ -140,10 +147,10 @@ struct Minutely: Codable {
     let data: [MinutelyData]
 }
 
-// MARK: - MinutelyDatum
+// MARK: - MinutelyData
 struct MinutelyData: Codable {
-    let precipIntensityError: Double
-    let precipType: PrecipType
+    let precipIntensityError: Double?
+    let precipType: PrecipType?
     let precipIntensity: Double
     let time: Int
     let precipProbability: Double

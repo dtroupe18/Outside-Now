@@ -18,7 +18,7 @@ final class DarkSkyWrapper {
     static let shared = DarkSkyWrapper()
     var response: JSON?
     
-    var responses = [String: JSON]()
+    var responses = [String: [String: Any]]() // qwe make json a type alias
 
     private let path = Bundle.main.path(forResource: "Keys", ofType: "plist")!
 
@@ -33,70 +33,51 @@ final class DarkSkyWrapper {
             userInfo: [NSLocalizedDescriptionKey: "\(description)"]
         ) as Error
     }
-    
-    func getFutureForecast(lat: Double, long: Double, formattedTime: String, completionHandler: @escaping (DailySummary?, [HourlyWeather]?, Error?) ->()) {
-        if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
-            DispatchQueue.global(qos: .utility).async {
-                if self.responses["\(lat)\(long)\(formattedTime)"] == nil {
-                    Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)").responseJSON(completionHandler: { (responseData) -> Void in
-                        
-                        if let error = responseData.result.error as? AFError {
-                            let err = NSError(domain: "Future Weather Request Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "\(error.localizedDescription)"])
-                            completionHandler(nil, nil, err)
-                        }
-                        else if responseData.result.value != nil {
-                            let json = JSON(responseData.result.value!)
 
-                            // qwe
-                            let dict = responseData.result.value as? [String: Any]
-                            print(dict!.asJSON)
+    func getFutureForecast(
+        lat: Double,
+        long: Double,
+        formattedTime: String,
+        onSuccess: ForecastCallback?,
+        onError: ErrorCallback?
+    ) {
 
-                            self.responses["\(lat)\(long)\(formattedTime)"] = json
-                            
-                            // Get summary, sunrise, sunset time
-                            //
-                            let dailySummary = DailySummary(fullJson: json)
-                            // Get hourly weather for that day
-                            //
-                            var hourlyWeatherArray = [HourlyWeather]()
-                            for hour in json["hourly"]["data"].arrayValue {
-                                let hourlyWeather = HourlyWeather(json: hour)
-                                hourlyWeatherArray.append(hourlyWeather)
-                            }
-                            completionHandler(dailySummary, hourlyWeatherArray, nil)
-                        }
-                    })
+        Alamofire.request(
+            "https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long),\(formattedTime)")
+            .responseJSON(completionHandler: { (response) -> Void in
+
+                if let error = response.result.error as? AFError {
+                    let err = self.makeErrorWithDescription(error.localizedDescription)
+                    onError?(err)
+                    return
                 }
-                else if let json = self.responses["\(lat)\(long)\(formattedTime)"] {
-                    // Get summary, sunrise, sunset time
-                    //
-                    let dailySummary = DailySummary(fullJson: json)
-                    // Get hourly weather for that day
-                    //
-                    var hourlyWeatherArray = [HourlyWeather]()
-                    for hour in json["hourly"]["data"].arrayValue {
-                        let hourlyWeather = HourlyWeather(json: hour)
-                        hourlyWeatherArray.append(hourlyWeather)
+
+                if let data = response.data {
+                    do {
+                        let forecast = try JSONDecoder().decode(Forecast.self, from: data)
+                        onSuccess?(forecast)
+                    } catch let err {
+                        // FIXME: Make this error generic
+                        let error = self.makeErrorWithDescription(err.localizedDescription)
+                        onError?(error)
                     }
-                    completionHandler(dailySummary, hourlyWeatherArray, nil)
                 }
-            }
-        }
+        })
     }
 
     func getForecast(lat: Double, long: Double, onSuccess: ForecastCallback?, onError: ErrorCallback?) {
         self.responses.removeAll()
 
         // WEAK SELF oho
-        Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long)").responseJSON { (responseData) -> Void in
+        Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long)").responseJSON { (response) -> Void in
 
-            if let error = responseData.result.error as? AFError {
+            if let error = response.result.error as? AFError {
                 let err = self.makeErrorWithDescription(error.localizedDescription)
                 onError?(err)
                 return
             }
 
-            if let data = responseData.result.value as? Data {
+            if let data = response.data {
                 do {
                     let forecast = try JSONDecoder().decode(Forecast.self, from: data)
                     onSuccess?(forecast)
@@ -112,63 +93,7 @@ final class DarkSkyWrapper {
             }
         }
     }
-    
-    func getForecast(lat: Double, long: Double, completionHandler: @escaping ([Weather]?, [HourlyWeather]?, Error?) -> ()) {
-        if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
-            DispatchQueue.global(qos: .utility).async {
-                // new location or refreshed weather data so we can clear responses
-                //
-                self.responses.removeAll()
-                Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long)").responseJSON { (responseData) -> Void in
-                    
-                    if let error = responseData.result.error as? AFError {
-                        let err = NSError(domain: "Weather Request Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "\(error.localizedDescription)"])
-                        completionHandler(nil, nil, err)
-                    }
-                        
-                    else if responseData.result.value != nil {
-                        var weatherArray = [Weather]()
-                        let swiftyJson = JSON(responseData.result.value!)
 
-                        // qwe
-                        let dict = responseData.result.value as? [String: Any]
-                        print(dict!.asJSON)
-
-                        // Save the response
-                        //
-                        self.response = swiftyJson
-                        // print("Full Response: \(swiftyJson)")
-                        let currentWeather = Weather(fullJson: swiftyJson)
-                        weatherArray.append(currentWeather)
-                        
-                        // Get Weather for the week
-                        //
-                        var first = true
-                        for day in swiftyJson["daily"]["data"].arrayValue {
-                            if !first {
-                                // Skip the first day since that information is already displayed
-                                //
-                                let dailyWeather = Weather(json: day)
-                                weatherArray.append(dailyWeather)
-                            } else {
-                                first = false
-                            }
-                        }
-                        
-                        // Get Hourly Weather
-                        //
-                        var hourlyWeatherArray = [HourlyWeather]()
-                        for hour in swiftyJson["hourly"]["data"].arrayValue {
-                            let hourlyWeather = HourlyWeather(json: hour)
-                            hourlyWeatherArray.append(hourlyWeather)
-                        }
-                        completionHandler(weatherArray, hourlyWeatherArray, nil)
-                    }
-                }
-            }
-        }
-    }
-    
     func getWeeklySummary() -> String? {
         if let json = response {
             return json["daily"]["summary"].stringValue

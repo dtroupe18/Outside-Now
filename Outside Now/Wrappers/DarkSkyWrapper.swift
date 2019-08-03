@@ -10,12 +10,29 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class DarkSkyWrapper {
+typealias ForecastCallback = (Forecast) -> Void
+typealias ErrorCallback = (Error) -> Void
+
+final class DarkSkyWrapper {
     
     static let shared = DarkSkyWrapper()
     var response: JSON?
     
     var responses = [String: JSON]()
+
+    private let path = Bundle.main.path(forResource: "Keys", ofType: "plist")!
+
+    private var apiKey: String {
+        return NSDictionary(contentsOfFile: path)!.value(forKey: "DarkSkyKey") as! String
+    }
+
+    private func makeErrorWithDescription(_ description: String) -> Error {
+        return NSError(
+            domain: "Weather Request Error",
+            code: 0,
+            userInfo: [NSLocalizedDescriptionKey: "\(description)"]
+        ) as Error
+    }
     
     func getFutureForecast(lat: Double, long: Double, formattedTime: String, completionHandler: @escaping (DailySummary?, [HourlyWeather]?, Error?) ->()) {
         if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
@@ -29,6 +46,11 @@ class DarkSkyWrapper {
                         }
                         else if responseData.result.value != nil {
                             let json = JSON(responseData.result.value!)
+
+                            // qwe
+                            let dict = responseData.result.value as? [String: Any]
+                            print(dict!.asJSON)
+
                             self.responses["\(lat)\(long)\(formattedTime)"] = json
                             
                             // Get summary, sunrise, sunset time
@@ -61,6 +83,35 @@ class DarkSkyWrapper {
             }
         }
     }
+
+    func getForecast(lat: Double, long: Double, onSuccess: ForecastCallback?, onError: ErrorCallback?) {
+        self.responses.removeAll()
+
+        // WEAK SELF oho
+        Alamofire.request("https://api.darksky.net/forecast/\(apiKey)/\(lat),\(long)").responseJSON { (responseData) -> Void in
+
+            if let error = responseData.result.error as? AFError {
+                let err = self.makeErrorWithDescription(error.localizedDescription)
+                onError?(err)
+                return
+            }
+
+            if let data = responseData.result.value as? Data {
+                do {
+                    let forecast = try JSONDecoder().decode(Forecast.self, from: data)
+                    onSuccess?(forecast)
+                } catch let err {
+                    // FIXME: Make this error generic
+                    let error = self.makeErrorWithDescription(err.localizedDescription)
+                    onError?(error)
+                }
+            } else {
+                // FIXME: Update copy
+                let error = self.makeErrorWithDescription("NO DATA")
+                onError?(error)
+            }
+        }
+    }
     
     func getForecast(lat: Double, long: Double, completionHandler: @escaping ([Weather]?, [HourlyWeather]?, Error?) -> ()) {
         if let apiKey = AppDelegate.shared()?.keys?["DarkSkyKey"] {
@@ -78,6 +129,11 @@ class DarkSkyWrapper {
                     else if responseData.result.value != nil {
                         var weatherArray = [Weather]()
                         let swiftyJson = JSON(responseData.result.value!)
+
+                        // qwe
+                        let dict = responseData.result.value as? [String: Any]
+                        print(dict!.asJSON)
+
                         // Save the response
                         //
                         self.response = swiftyJson

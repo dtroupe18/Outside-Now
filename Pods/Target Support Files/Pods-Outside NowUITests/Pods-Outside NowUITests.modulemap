@@ -1,0 +1,6 @@
+framework module Pods_Outside_NowUITests {
+  umbrella header "Pods-Outside NowUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

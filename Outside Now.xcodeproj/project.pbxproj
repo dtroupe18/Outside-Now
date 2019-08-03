@@ -271,7 +271,6 @@
 				5506398B20350B3A00FFF284 /* Frameworks */,
 				5506398C20350B3A00FFF284 /* Resources */,
 				25ADDE06B94E0F0A3E54F760 /* [CP] Embed Pods Frameworks */,
-				F8AF6DE12136A09446812720 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -290,8 +289,6 @@
 				550639A120350B3A00FFF284 /* Sources */,
 				550639A220350B3A00FFF284 /* Frameworks */,
 				550639A320350B3A00FFF284 /* Resources */,
-				7F8321A725E5006F5D69006F /* [CP] Embed Pods Frameworks */,
-				DC76A205D17AFFEA319921A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -311,8 +308,6 @@
 				550639AC20350B3A00FFF284 /* Sources */,
 				550639AD20350B3A00FFF284 /* Frameworks */,
 				550639AE20350B3A00FFF284 /* Resources */,
-				D707B4717E6414F496D2A3D8 /* [CP] Embed Pods Frameworks */,
-				C5A35CF567CBB31C6380DEA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -410,7 +405,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -421,7 +416,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6A65E1C9B04E51641F8D5E1A /* [CP] Check Pods Manifest.lock */ = {
@@ -440,21 +435,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F8321A725E5006F5D69006F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowTests/Pods-Outside NowTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		81865EF90F41469E046A95B5 /* [CP] Check Pods Manifest.lock */ = {
@@ -491,66 +471,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C5A35CF567CBB31C6380DEA0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D707B4717E6414F496D2A3D8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowUITests/Pods-Outside NowUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DC76A205D17AFFEA319921A2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside NowTests/Pods-Outside NowTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F8AF6DE12136A09446812720 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outside Now/Pods-Outside Now-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -746,9 +666,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D3D7B5BPEZ;
 				INFOPLIST_FILE = "Outside Now/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.HighTreeDevelopment.Outside-Now";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -762,9 +684,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D3D7B5BPEZ;
 				INFOPLIST_FILE = "Outside Now/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.HighTreeDevelopment.Outside-Now";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

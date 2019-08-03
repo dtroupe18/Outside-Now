@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Outside Now.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:Samples"
+      name = "Samples">
+      <FileRef
+         location = "group:Demo.gif">
+      </FileRef>
+      <FileRef
+         location = "group:Four.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:One.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:Three.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:Two.jpg">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

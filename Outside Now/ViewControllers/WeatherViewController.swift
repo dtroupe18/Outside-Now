@@ -34,15 +34,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     // if the user searches for a location in another timeZone.
     //
     var requestTimeZone: String?
-    
-    var weatherArray = [Weather]()
-    var hourlyWeather = [HourlyWeather]()
-    
+
+    // FIXME: Use a viewModel.....
+    var forecast: Forecast?
     var selectedIndex: Int = -1
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+
         if LocationWrapper.shared.canAccessLocation() {
             getPlacemark()
         }
@@ -108,7 +108,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         LocationWrapper.shared.authStatus = status
         if status == .denied {
-            showAlert(title: "Location Access Denied", message: "Without access to your location Outside Now can only provide weather if your search for a location. You can update location access in settings.")
+            showAlert(title: "Location Access Denied", message: "Without access to your location Outside Now can only provide weather if you search for a location. You can update location access in settings.")
         } else if status == .authorizedAlways || status == .authorizedWhenInUse {
             // Get the users location and then the weather
             //
@@ -123,23 +123,31 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hourlyWeather.count
+        guard let forecast = forecast else { return 0 }
+        return forecast.hourly.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyCell", for: indexPath) as! HourlyCell
-        
-        if let temp = hourlyWeather[indexPath.row].temperature.stringRepresentation {
-            cell.tempLabel.text = "\(temp)°"
-        }
-        if let precipPercent = hourlyWeather[indexPath.row].precipProbability.percentString {
-            cell.precipLabel.text = precipPercent
-        }
-        cell.hourLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: hourlyWeather[indexPath.row].time, timeZone: lastPlacemark?.timeZone)
+
+        guard let hourlyData = forecast?.hourly.data else { return cell }
+
+        let temp = hourlyData[indexPath.row].temperature.stringRepresentation ?? ""
+        cell.tempLabel.text = "\(temp)°"
+
+        let precipPercent = hourlyData[indexPath.row].precipProbability.percentString ?? ""
+        cell.precipLabel.text = precipPercent
+
+        cell.hourLabel.text = DarkSkyWrapper.convertTimestampToHour(
+            seconds: hourlyData[indexPath.row].time.asDouble,
+            timeZone: lastPlacemark?.timeZone
+        )
+
         cell.tempLabel.textColor = UIColor.white
         cell.precipLabel.textColor = UIColor.white
         cell.hourLabel.textColor = UIColor.white
-        cell.imageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: hourlyWeather[indexPath.row].iconName)
+
+        cell.imageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: hourlyData[indexPath.row].icon.rawValue)
         return cell
     }
     
@@ -150,13 +158,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if weatherArray.isEmpty {
-            return 0
-        } else {
-            // One extra row for the weekly summary
-            //
-            return weatherArray.count
-        }
+        guard let dailyWeather = forecast?.daily.data else { return 0 }
+        return dailyWeather.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -164,21 +167,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             // Show the weekly summary cell
             //
             let cell = tableView.dequeueReusableCell(withIdentifier: "weeklySummaryCell", for: indexPath) as! WeeklySummaryCell
-            
-            if let summary = DarkSkyWrapper.shared.getWeeklySummary() {
+
+            if let summary = forecast?.daily.summary {
                 cell.weeklySummaryLabel.textColor = UIColor.white
                 cell.summaryLabel.text = summary
                 cell.summaryLabel.textColor = UIColor.white
+
                 // Double use for this cell
                 // It can display the weekly summary or the local weather alert
                 //
-                let alert = DarkSkyWrapper.shared.getAlerts()
-                if alert != "" {
-                    cell.summaryLabel.text = alert
+                if let alert = forecast?.alerts?.first {
+                    cell.summaryLabel.text = alert.alertDescription
                     cell.weeklySummaryLabel.text = "Weather Alert"
                     cell.summaryLabel.textColor = UIColor.red
                     cell.weeklySummaryLabel.textColor = UIColor.red
                 }
+
                 cell.backgroundColor = UIColor.black
                 cell.selectionStyle = .none
             } else {
@@ -191,10 +195,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             // Skip index 0 which is the current days weather since it is already displayed
             //
             let index = indexPath.row
-            cell.weatherImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: weatherArray[index].iconName)
-            cell.dayLabel.text = DarkSkyWrapper.convertTimestampToDayName(seconds: weatherArray[index].time)
-            cell.hiLabel.text = weatherArray[index].highTemp.stringRepresentation
-            cell.lowLabel.text = weatherArray[index].lowTemp.stringRepresentation
+            guard let weatherArray = forecast?.daily.data else { return cell }
+
+            cell.weatherImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: weatherArray[index].icon.rawValue)
+            cell.dayLabel.text = DarkSkyWrapper.convertTimestampToDayName(seconds: weatherArray[index].time.asDouble)
+            cell.hiLabel.text = weatherArray[index].temperatureHigh.stringRepresentation
+            cell.lowLabel.text = weatherArray[index].temperatureLow.stringRepresentation
             cell.precipPercentLabel.text = weatherArray[index].precipProbability.percentString
             cell.backgroundColor = UIColor.black
             cell.dayLabel.textColor = UIColor.white
@@ -317,55 +323,48 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     func getWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        DarkSkyWrapper.shared.getForecast(lat: latitude, long: longitude, completionHandler: { weatherArray, hourlyArray, error in
-            
-            if error != nil {
-                self.showAlert(title: "Error", message: error!.localizedDescription)
-            }
-            
-            if let weather = weatherArray {
-                self.weatherArray = weather
-                self.tableView.reloadData()
-                self.displayCurrentConditions()
-            }
-            if let hourly = hourlyArray {
-                self.hourlyWeather = hourly
-                self.collectionView.resetScrollPositionToTop()
-                self.collectionView.reloadData()
-            } else {
-                print("hourlyWeather = nil")
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-                CustomActivityIndicator.shared.hideActivityIndicator(uiView: self.view)
-            }
+        // FIXME: Weak self oho
+        DarkSkyWrapper.shared.getForecast(lat: latitude, long: longitude, onSuccess: { forecast in
+            self.forecast = forecast
+            self.tableView.reloadData() // zxc
+            self.collectionView.reloadData()
+            self.displayCurrentConditions() // zxc
+            self.hideActivityIndicator()
+        }, onError: { error in
+            self.showAlert(title: "Error", message: error.localizedDescription)
+            self.hideActivityIndicator()
         })
+    }
+
+    private func hideActivityIndicator() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+            CustomActivityIndicator.shared.hideActivityIndicator(uiView: self.view)
+        }
     }
     
     func displayCurrentConditions() {
-        if !weatherArray.isEmpty {
-            let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)]
-            
-            if let currentTemp = weatherArray[0].currentTemp?.stringRepresentation {
-                currentTempLabel.text = "\(currentTemp)°"
-            }
-            
-            if let hi = weatherArray[0].highTemp.stringRepresentation {
-                let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
-                let attributedHiTemp = NSMutableAttributedString(string: "\(hi)°")
-                attributedHi.append(attributedHiTemp)
+        let attribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)]
 
-                todayHiLabel.attributedText = attributedHi
-            }
-            if let lo = weatherArray[0].lowTemp.stringRepresentation {
-                let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
-                let attributedLowTemp = NSMutableAttributedString(string: "\(lo)°")
-                attributedLow.append(attributedLowTemp)
-                
-                todayLowLabel.attributedText = attributedLow
-            }
-            currentSummaryLabel.text = weatherArray[0].summary
-        }   
+        guard let weatherForcast = forecast, let weatherArray = forecast?.daily.data else { return }
+
+        let currentTemp = weatherForcast.currently.temperature.stringRepresentation ?? ""
+        currentTempLabel.text = "\(currentTemp)°"
+
+        if let hi = weatherArray[0].temperatureHigh.stringRepresentation {
+            let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
+            let attributedHiTemp = NSMutableAttributedString(string: "\(hi)°")
+            attributedHi.append(attributedHiTemp)
+
+            todayHiLabel.attributedText = attributedHi
+        }
+        if let lo = weatherArray[0].temperatureLow.stringRepresentation {
+            let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
+            let attributedLowTemp = NSMutableAttributedString(string: "\(lo)°")
+            attributedLow.append(attributedLowTemp)
+
+            todayLowLabel.attributedText = attributedLow
+        }
+        currentSummaryLabel.text = weatherArray[0].summary
     }
     
     // Marker: SearchBar Delegate
@@ -410,10 +409,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         if segue.identifier == "toDailyWeather" {
             if let vc = segue.destination as? DayViewController {
                 vc.locationString = locationLabel.text
+
                 if selectedIndex != -1 {
-                    vc.weatherArray = weatherArray
+                    vc.forcast = forecast
                     vc.currentIndex = selectedIndex
                 }
+
                 if let placemark = lastPlacemark {
                     vc.placemark = placemark
                 }

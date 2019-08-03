@@ -16,14 +16,12 @@
 		550639B520350B3A00FFF284 /* Outside_NowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550639B420350B3A00FFF284 /* Outside_NowUITests.swift */; };
 		551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DEA20350C6500455A3E /* Double++Extension.swift */; };
 		551E6DEE20350C9E00455A3E /* HourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DED20350C9E00455A3E /* HourlyCell.swift */; };
-		551E6DF120350CD500455A3E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF020350CD500455A3E /* Weather.swift */; };
-		551E6DF320350CE600455A3E /* HourlyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF220350CE600455A3E /* HourlyWeather.swift */; };
 		551E6DF620350E8A00455A3E /* LocationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF520350E8A00455A3E /* LocationWrapper.swift */; };
 		551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */; };
 		551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DFA20350FAC00455A3E /* WeatherViewController.swift */; };
 		551E6DFD20350FE400455A3E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 551E6DFC20350FE400455A3E /* Keys.plist */; };
 		5522EE2822F604C200CAF52F /* ForecastResponseWithAlert.json in Resources */ = {isa = PBXBuildFile; fileRef = 5522EE2722F604C200CAF52F /* ForecastResponseWithAlert.json */; };
-		5550E376203F46A800C9A5A5 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550E375203F46A800C9A5A5 /* DailySummary.swift */; };
+		5522EE2A22F621B400CAF52F /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2922F621B400CAF52F /* Int+Utils.swift */; };
 		5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */; };
 		55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555230F203662A200204E80 /* WeeklySummaryCell.swift */; };
 		55552312203662CF00204E80 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55552311203662CF00204E80 /* WeatherCell.swift */; };
@@ -76,14 +74,12 @@
 		550639B620350B3A00FFF284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551E6DEA20350C6500455A3E /* Double++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double++Extension.swift"; sourceTree = "<group>"; };
 		551E6DED20350C9E00455A3E /* HourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCell.swift; sourceTree = "<group>"; };
-		551E6DF020350CD500455A3E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		551E6DF220350CE600455A3E /* HourlyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeather.swift; sourceTree = "<group>"; };
 		551E6DF520350E8A00455A3E /* LocationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWrapper.swift; sourceTree = "<group>"; };
 		551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyWrapper.swift; sourceTree = "<group>"; };
 		551E6DFA20350FAC00455A3E /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		551E6DFC20350FE400455A3E /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		5522EE2722F604C200CAF52F /* ForecastResponseWithAlert.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ForecastResponseWithAlert.json; sourceTree = "<group>"; };
-		5550E375203F46A800C9A5A5 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
+		5522EE2922F621B400CAF52F /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
 		5555230F203662A200204E80 /* WeeklySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummaryCell.swift; sourceTree = "<group>"; };
 		55552311203662CF00204E80 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
@@ -202,6 +198,7 @@
 				5555231320375C7500204E80 /* Date++Extension.swift */,
 				5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */,
 				55FB2F6222F5F40C0002940C /* Dictionary+Utils.swift */,
+				5522EE2922F621B400CAF52F /* Int+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -220,9 +217,6 @@
 		551E6DEF20350CAC00455A3E /* Structs */ = {
 			isa = PBXGroup;
 			children = (
-				551E6DF020350CD500455A3E /* Weather.swift */,
-				551E6DF220350CE600455A3E /* HourlyWeather.swift */,
-				5550E375203F46A800C9A5A5 /* DailySummary.swift */,
 				55FB2F6922F5FBD40002940C /* Forecast.swift */,
 			);
 			path = Structs;
@@ -346,7 +340,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "High Tree Development";
 				TargetAttributes = {
 					5506398D20350B3A00FFF284 = {
@@ -429,12 +423,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Outside Now/Pods-Outside Now-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -507,17 +499,15 @@
 				55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */,
 				551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */,
 				5585BDEB20387F1E0076AD4D /* UIScrollView++Extension.swift in Sources */,
+				5522EE2A22F621B400CAF52F /* Int+Utils.swift in Sources */,
 				551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */,
-				5550E376203F46A800C9A5A5 /* DailySummary.swift in Sources */,
 				55FB2F6322F5F40C0002940C /* Dictionary+Utils.swift in Sources */,
 				5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */,
 				55552312203662CF00204E80 /* WeatherCell.swift in Sources */,
 				551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */,
 				55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */,
-				551E6DF120350CD500455A3E /* Weather.swift in Sources */,
 				555523162037723300204E80 /* CustomActivityIndicator.swift in Sources */,
 				5506399220350B3A00FFF284 /* AppDelegate.swift in Sources */,
-				551E6DF320350CE600455A3E /* HourlyWeather.swift in Sources */,
 				55FB2F6A22F5FBD40002940C /* Forecast.swift in Sources */,
 				551E6DF620350E8A00455A3E /* LocationWrapper.swift in Sources */,
 				5555231420375C7500204E80 /* Date++Extension.swift in Sources */,
@@ -591,6 +581,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -598,6 +589,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -648,6 +640,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -655,6 +648,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -27,11 +27,11 @@ class ForecastDecodeTest: XCTestCase {
 
         let forecast = try! JSONDecoder().decode(Forecast.self, from: data)
 
-        let currently = forecast.currently
-        let daily = forecast.daily
-        let hourly = forecast.hourly
-        let minutely = forecast.minutely
-        let flags = forecast.flags
+//        let currently = forecast.currently
+//        let daily = forecast.daily
+//        let hourly = forecast.hourly
+//        let minutely = forecast.minutely
+//        let flags = forecast.flags
 
         XCTAssertNil(forecast.alerts)
         XCTAssertEqual(forecast.offset, -7)
@@ -51,11 +51,11 @@ class ForecastDecodeTest: XCTestCase {
 
         let forecast = try! JSONDecoder().decode(Forecast.self, from: data)
 
-        let currently = forecast.currently
-        let daily = forecast.daily
-        let hourly = forecast.hourly
-        let minutely = forecast.minutely
-        let flags = forecast.flags
+//        let currently = forecast.currently
+//        let daily = forecast.daily
+//        let hourly = forecast.hourly
+//        let minutely = forecast.minutely
+//        let flags = forecast.flags
 
         XCTAssertNotNil(forecast.alerts)
         XCTAssertFalse(forecast.alerts!.isEmpty)

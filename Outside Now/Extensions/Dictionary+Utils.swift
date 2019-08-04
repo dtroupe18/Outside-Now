@@ -9,7 +9,7 @@
 import Foundation
 
 extension Dictionary {
-    /// get Dictionary as pretty printed JSON
+    /// Returns Dictionary with pretty printed JSON
     /// - warning: returns "invalid JSON" is JSON is not properly formated
     var asJSON: String {
         let invalidJson = "invalid JSON"

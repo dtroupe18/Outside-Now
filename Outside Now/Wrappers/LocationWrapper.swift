@@ -21,24 +21,18 @@ class LocationWrapper {
     
     func canAccessLocation() -> Bool {
         switch authStatus {
-            
-        case .authorizedAlways:
+        case .authorizedAlways, .authorizedWhenInUse:
             return true
-        case .authorizedWhenInUse:
-            return true
-        case .denied:
+        case .denied, .restricted, .notDetermined:
             return false
-        case .restricted:
+        @unknown default:
             return false
-        case .notDetermined:
-           return false
         }
     }
     
     func requestAccess() {
         if authStatus == .denied {
             // We cannot ask the user again so we just want to alert them
-            //
             if let topVC = UIApplication.topViewController() {
                 topVC.showAlert(title: "Location Access Denied", message: "Without access to your location outside now can only provide weather if your search for a location. You can update location access in settings.")
             }

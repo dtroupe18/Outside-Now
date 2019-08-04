@@ -6,7 +6,7 @@
 //  Copyright © 2019 High Tree Development. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - Forcast
 struct Forecast: Codable {
@@ -37,7 +37,6 @@ struct Alert: Codable {
 }
 
 // MARK: - Currently
-// FIXME: Rename this
 struct Currently: Codable {
     let apparentTemperature, pressure, precipIntensity: Double
     let time: Int
@@ -52,9 +51,29 @@ struct Currently: Codable {
     let windBearing: Int
     let cloudCover, ozone, precipProbability: Double
     let precipIntensityError: Double?
+
+    /// Returns double as string with MPH appended
+    var windSpeedString: String? {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 0
+
+        let speed = windSpeed.rounded(.toNearestOrAwayFromZero)
+
+        let formatedString = formatter.string(from: NSNumber(value: speed))
+        if var string = formatedString {
+            string += " MPH"
+            return string
+        } else {
+            return nil
+        }
+    }
+
+    func hourString(timeZone: TimeZone?) -> String {
+        return time.asDouble.hourString(timeZone: timeZone)
+    }
 }
 
-// MARK: - ICON NAMES
+// MARK: - ICON NAME
 enum IconName: String, Codable {
     case clearDay = "clear-day"
     case clearNight = "clear-night"
@@ -67,10 +86,20 @@ enum IconName: String, Codable {
     case partlyCloudyDay = "partly-cloudy-day"
     case partlyCloudyNight = "partly-cloudy-night"
 
-    // Future
-    case hail
-    case thunderstorm
-    case tornado
+    // Future:
+    // case hail
+    // case thunderstorm
+    // case tornado
+
+    var image: UIImage? {
+        if self == .fog {
+            let cloudyImage = UIImage(named: IconName.cloudy.rawValue)
+            guard let img = cloudyImage else { return cloudyImage }
+            return img.addTextToImage(drawText: "FOG", inImage: img, atPoint: CGPoint(x: 5, y: 28))
+        } else {
+            return UIImage(named: self.rawValue)
+        }
+    }
 }
 
 enum PrecipType: String, Codable {
@@ -114,10 +143,20 @@ struct DailyData: Codable {
     let temperatureMin: Double
     let temperatureMaxTime: Int
 
-    var formattedTimeString: String? {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 0
-        return formatter.string(from: NSNumber(value: self.time))
+    func sunriseHourMinStr(timeZone: TimeZone?) -> String {
+        return sunriseTime.asDouble.hourMinString(timeZone: timeZone)
+    }
+
+    func sunsetHourMinStr(timeZone: TimeZone?) -> String {
+        return sunsetTime.asDouble.hourMinString(timeZone: timeZone)
+    }
+
+    func timeString(includeDayName: Bool) -> String {
+        return self.time.asDouble.monthDayString(includeDayName: includeDayName)
+    }
+
+    var dayName: String {
+        return self.time.asDouble.dayNameString()
     }
 }
 

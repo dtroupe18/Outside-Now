@@ -58,9 +58,3 @@ class CustomActivityIndicator {
         }
     }
 }
-
-// In order to show the activity indicator, call the function from your view controller
-// CustomActivityIndicator.sharedInstance.showActivityIndicator(uiView: self.view)
-
-// In order to hide the activity indicator, call the function from your view controller
-// CustomActivityIndicator.sharedInstance.hideActivityIndicator(uiView: self.view)

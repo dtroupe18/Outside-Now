@@ -131,24 +131,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyCell", for: indexPath) as! HourlyCell
 
-        guard let hourlyData = forecast?.hourly.data else { return cell }
+        guard let hourlyData = forecast?.hourly.data[indexPath.row] else { return cell }
 
-        let temp = hourlyData[indexPath.row].temperature.stringRepresentation ?? ""
-        cell.tempLabel.text = "\(temp)°"
-
-        let precipPercent = hourlyData[indexPath.row].precipProbability.percentString ?? ""
-        cell.precipLabel.text = precipPercent
-
-        cell.hourLabel.text = DarkSkyWrapper.convertTimestampToHour(
-            seconds: hourlyData[indexPath.row].time.asDouble,
-            timeZone: lastPlacemark?.timeZone
-        )
-
+        cell.tempLabel.text = "\(hourlyData.temperature.stringRepresentation ?? "")°"
+        cell.precipLabel.text = hourlyData.precipProbability.percentString ?? ""
+        cell.hourLabel.text = hourlyData.hourString(timeZone: lastPlacemark?.timeZone)
         cell.tempLabel.textColor = UIColor.white
         cell.precipLabel.textColor = UIColor.white
         cell.hourLabel.textColor = UIColor.white
-
-        cell.imageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: hourlyData[indexPath.row].icon.rawValue)
+        cell.imageView.image = hourlyData.icon.image
         return cell
     }
     
@@ -193,16 +184,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherCell
-            // Skip index 0 which is the current days weather since it is already displayed
-            //
-            let index = indexPath.row
-            guard let weatherArray = forecast?.daily.data else { return cell }
+            guard let dailyData = forecast?.daily.data[indexPath.row] else { return cell }
 
-            cell.weatherImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: weatherArray[index].icon.rawValue)
-            cell.dayLabel.text = DarkSkyWrapper.convertTimestampToDayName(seconds: weatherArray[index].time.asDouble)
-            cell.hiLabel.text = weatherArray[index].temperatureHigh.stringRepresentation
-            cell.lowLabel.text = weatherArray[index].temperatureLow.stringRepresentation
-            cell.precipPercentLabel.text = weatherArray[index].precipProbability.percentString
+            cell.weatherImageView.image = dailyData.icon.image
+            cell.dayLabel.text = dailyData.dayName
+            cell.hiLabel.text = dailyData.temperatureHigh.stringRepresentation
+            cell.lowLabel.text = dailyData.temperatureLow.stringRepresentation
+            cell.precipPercentLabel.text = dailyData.precipProbability.percentString
             cell.backgroundColor = UIColor.black
             cell.dayLabel.textColor = UIColor.white
             cell.hiLabel.textColor = UIColor.white
@@ -225,7 +213,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     // Marker: Location - Weather
-    //
     func getPlacemark() {
         LocationWrapper.shared.getPlaceMark(completion: { placemark, error in
             if let err = error {

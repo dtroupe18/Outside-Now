@@ -13,23 +13,23 @@
 		5506399C20350B3A00FFF284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5506399B20350B3A00FFF284 /* Assets.xcassets */; };
 		5506399F20350B3A00FFF284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5506399D20350B3A00FFF284 /* LaunchScreen.storyboard */; };
 		550639B520350B3A00FFF284 /* Outside_NowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550639B420350B3A00FFF284 /* Outside_NowUITests.swift */; };
-		551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DEA20350C6500455A3E /* Double++Extension.swift */; };
+		551E6DEB20350C6500455A3E /* Double+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DEA20350C6500455A3E /* Double+Utils.swift */; };
 		551E6DEE20350C9E00455A3E /* HourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DED20350C9E00455A3E /* HourlyCell.swift */; };
 		551E6DF620350E8A00455A3E /* LocationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF520350E8A00455A3E /* LocationWrapper.swift */; };
-		551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */; };
 		551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551E6DFA20350FAC00455A3E /* WeatherViewController.swift */; };
 		551E6DFD20350FE400455A3E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 551E6DFC20350FE400455A3E /* Keys.plist */; };
 		5522EE2822F604C200CAF52F /* ForecastResponseWithAlert.json in Resources */ = {isa = PBXBuildFile; fileRef = 5522EE2722F604C200CAF52F /* ForecastResponseWithAlert.json */; };
 		5522EE2A22F621B400CAF52F /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2922F621B400CAF52F /* Int+Utils.swift */; };
 		5522EE2D22F6317400CAF52F /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2C22F6317400CAF52F /* NetworkClient.swift */; };
+		5522EE2F22F63F2200CAF52F /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2E22F63F2200CAF52F /* UIImage+Utils.swift */; };
 		5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */; };
 		55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555230F203662A200204E80 /* WeeklySummaryCell.swift */; };
 		55552312203662CF00204E80 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55552311203662CF00204E80 /* WeatherCell.swift */; };
-		5555231420375C7500204E80 /* Date++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555231320375C7500204E80 /* Date++Extension.swift */; };
+		5555231420375C7500204E80 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555231320375C7500204E80 /* Date+Utils.swift */; };
 		555523162037723300204E80 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555523152037723300204E80 /* CustomActivityIndicator.swift */; };
-		5585BDEB20387F1E0076AD4D /* UIScrollView++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */; };
-		55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D392036048D0060334A /* UIApplication++Extension.swift */; };
-		55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D3B2036052C0060334A /* UIViewController++Extension.swift */; };
+		5585BDEB20387F1E0076AD4D /* UIScrollView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585BDEA20387F1E0076AD4D /* UIScrollView+Utils.swift */; };
+		55A67D3A2036048D0060334A /* UIApplication+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D392036048D0060334A /* UIApplication+Utils.swift */; };
+		55A67D3C2036052C0060334A /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A67D3B2036052C0060334A /* UIViewController+Utils.swift */; };
 		55BA93DA203F364B002FD324 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BA93D9203F364B002FD324 /* DayViewController.swift */; };
 		55FB2F6322F5F40C0002940C /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FB2F6222F5F40C0002940C /* Dictionary+Utils.swift */; };
 		55FB2F6522F5F9D10002940C /* ForecastDecodeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FB2F6422F5F9D10002940C /* ForecastDecodeTest.swift */; };
@@ -71,23 +71,23 @@
 		550639B020350B3A00FFF284 /* Outside NowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Outside NowUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		550639B420350B3A00FFF284 /* Outside_NowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outside_NowUITests.swift; sourceTree = "<group>"; };
 		550639B620350B3A00FFF284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		551E6DEA20350C6500455A3E /* Double++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double++Extension.swift"; sourceTree = "<group>"; };
+		551E6DEA20350C6500455A3E /* Double+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Utils.swift"; sourceTree = "<group>"; };
 		551E6DED20350C9E00455A3E /* HourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCell.swift; sourceTree = "<group>"; };
 		551E6DF520350E8A00455A3E /* LocationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWrapper.swift; sourceTree = "<group>"; };
-		551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyWrapper.swift; sourceTree = "<group>"; };
 		551E6DFA20350FAC00455A3E /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		551E6DFC20350FE400455A3E /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		5522EE2722F604C200CAF52F /* ForecastResponseWithAlert.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ForecastResponseWithAlert.json; sourceTree = "<group>"; };
 		5522EE2922F621B400CAF52F /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		5522EE2C22F6317400CAF52F /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		5522EE2E22F63F2200CAF52F /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
 		5555230F203662A200204E80 /* WeeklySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummaryCell.swift; sourceTree = "<group>"; };
 		55552311203662CF00204E80 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
-		5555231320375C7500204E80 /* Date++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++Extension.swift"; sourceTree = "<group>"; };
+		5555231320375C7500204E80 /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		555523152037723300204E80 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
-		5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView++Extension.swift"; sourceTree = "<group>"; };
-		55A67D392036048D0060334A /* UIApplication++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication++Extension.swift"; sourceTree = "<group>"; };
-		55A67D3B2036052C0060334A /* UIViewController++Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController++Extension.swift"; sourceTree = "<group>"; };
+		5585BDEA20387F1E0076AD4D /* UIScrollView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Utils.swift"; sourceTree = "<group>"; };
+		55A67D392036048D0060334A /* UIApplication+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Utils.swift"; sourceTree = "<group>"; };
+		55A67D3B2036052C0060334A /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		55BA93D9203F364B002FD324 /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		55FB2F6222F5F40C0002940C /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		55FB2F6422F5F9D10002940C /* ForecastDecodeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDecodeTest.swift; sourceTree = "<group>"; };
@@ -192,13 +192,14 @@
 		551E6DE920350C4800455A3E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				551E6DEA20350C6500455A3E /* Double++Extension.swift */,
-				55A67D392036048D0060334A /* UIApplication++Extension.swift */,
-				55A67D3B2036052C0060334A /* UIViewController++Extension.swift */,
-				5555231320375C7500204E80 /* Date++Extension.swift */,
-				5585BDEA20387F1E0076AD4D /* UIScrollView++Extension.swift */,
+				5555231320375C7500204E80 /* Date+Utils.swift */,
 				55FB2F6222F5F40C0002940C /* Dictionary+Utils.swift */,
+				551E6DEA20350C6500455A3E /* Double+Utils.swift */,
 				5522EE2922F621B400CAF52F /* Int+Utils.swift */,
+				55A67D392036048D0060334A /* UIApplication+Utils.swift */,
+				5522EE2E22F63F2200CAF52F /* UIImage+Utils.swift */,
+				5585BDEA20387F1E0076AD4D /* UIScrollView+Utils.swift */,
+				55A67D3B2036052C0060334A /* UIViewController+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				551E6DF520350E8A00455A3E /* LocationWrapper.swift */,
-				551E6DF720350EA200455A3E /* DarkSkyWrapper.swift */,
 				555523152037723300204E80 /* CustomActivityIndicator.swift */,
 			);
 			path = Wrappers;
@@ -487,23 +487,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				5522EE2D22F6317400CAF52F /* NetworkClient.swift in Sources */,
-				55A67D3A2036048D0060334A /* UIApplication++Extension.swift in Sources */,
+				55A67D3A2036048D0060334A /* UIApplication+Utils.swift in Sources */,
 				55BA93DA203F364B002FD324 /* DayViewController.swift in Sources */,
-				55A67D3C2036052C0060334A /* UIViewController++Extension.swift in Sources */,
-				551E6DEB20350C6500455A3E /* Double++Extension.swift in Sources */,
-				5585BDEB20387F1E0076AD4D /* UIScrollView++Extension.swift in Sources */,
+				5522EE2F22F63F2200CAF52F /* UIImage+Utils.swift in Sources */,
+				55A67D3C2036052C0060334A /* UIViewController+Utils.swift in Sources */,
+				551E6DEB20350C6500455A3E /* Double+Utils.swift in Sources */,
+				5585BDEB20387F1E0076AD4D /* UIScrollView+Utils.swift in Sources */,
 				5522EE2A22F621B400CAF52F /* Int+Utils.swift in Sources */,
 				551E6DFB20350FAC00455A3E /* WeatherViewController.swift in Sources */,
 				55FB2F6322F5F40C0002940C /* Dictionary+Utils.swift in Sources */,
 				5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */,
 				55552312203662CF00204E80 /* WeatherCell.swift in Sources */,
-				551E6DF820350EA200455A3E /* DarkSkyWrapper.swift in Sources */,
 				55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */,
 				555523162037723300204E80 /* CustomActivityIndicator.swift in Sources */,
 				5506399220350B3A00FFF284 /* AppDelegate.swift in Sources */,
 				55FB2F6A22F5FBD40002940C /* Forecast.swift in Sources */,
 				551E6DF620350E8A00455A3E /* LocationWrapper.swift in Sources */,
-				5555231420375C7500204E80 /* Date++Extension.swift in Sources */,
+				5555231420375C7500204E80 /* Date+Utils.swift in Sources */,
 				551E6DEE20350C9E00455A3E /* HourlyCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

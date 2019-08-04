@@ -99,13 +99,10 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func updateView() {
         if currentIndex >= 0 && currentIndex < forcast.daily.data.count {
             let weather = forcast.daily.data[currentIndex]
+
             self.summaryLabel.text = weather.summary
-
-            let sunriseTime = weather.sunriseTime.asDouble
-            let sunsetTime = weather.sunsetTime.asDouble
-
-            self.sunriseLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunriseTime, timeZone: self.placemark.timeZone)
-            self.sunsetLabel.text = DarkSkyWrapper.convertTimestampToHourMin(seconds: sunsetTime, timeZone: self.placemark.timeZone)
+            self.sunriseLabel.text = weather.sunriseHourMinStr(timeZone: self.placemark.timeZone)
+            self.sunsetLabel.text = weather.sunsetHourMinStr(timeZone: self.placemark.timeZone)
 
             if self.currentIndex > 0 {
                 let indexPath = IndexPath(row: 0, section: 0)
@@ -113,16 +110,14 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             }
             
             if currentIndex > 0 {
-                let dateString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time.asDouble)
-                dayLabel.text = dateString
+                dayLabel.text = weather.timeString(includeDayName: true)
             } else if currentIndex == 0 {
-                let monthDayString = DarkSkyWrapper.convertTimestampToDayDate(seconds: weather.time.asDouble, fullString: false)
+                let monthDayString = weather.timeString(includeDayName: false)
                 dayLabel.text = "Today\n\(monthDayString)"
                 scrollTableViewToCurrentHour()
             }
             
             // Make "High" & "Low" bold on their labels
-            //
             let attribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
             let attributedHi = NSMutableAttributedString(string:  "High  ", attributes: attribute)
             let attributedLow = NSMutableAttributedString(string: "Low   ", attributes: attribute)
@@ -161,12 +156,14 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "enhancedHourlyCell", for: indexPath) as! HourlyTableViewCell
-        
-        cell.timeLabel.text = DarkSkyWrapper.convertTimestampToHour(seconds: forcast.hourly.data[indexPath.row].time.asDouble, timeZone: placemark.timeZone)
-        cell.condImageView.image = DarkSkyWrapper.convertIconNameToImage(iconName: forcast.hourly.data[indexPath.row].icon.rawValue)
-        cell.tempLabel.text = "\(forcast.hourly.data[indexPath.row].temperature.stringRepresentation ?? "")°"
-        cell.precipLabel.text = forcast.hourly.data[indexPath.row].precipProbability.percentString
-        cell.windLabel.text = forcast.hourly.data[indexPath.row].windSpeed.windSpeedString
+
+        let hourlyData = forcast.hourly.data[indexPath.row]
+
+        cell.timeLabel.text = hourlyData.hourString(timeZone: placemark.timeZone)
+        cell.condImageView.image = hourlyData.icon.image
+        cell.tempLabel.text = "\(hourlyData.temperature.stringRepresentation ?? "")°"
+        cell.precipLabel.text = hourlyData.precipProbability.percentString
+        cell.windLabel.text = hourlyData.windSpeedString
         cell.selectionStyle = .none
         return cell
     }

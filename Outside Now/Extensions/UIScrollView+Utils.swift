@@ -1,5 +1,5 @@
 //
-//  UIScrollView++Extension.swift
+//  UIScrollView+Utils.swift
 //  Outside Now
 //
 //  Created by Dave on 2/17/18.

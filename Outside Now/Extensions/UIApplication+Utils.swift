@@ -1,5 +1,5 @@
 //
-//  UIApplication++Extension.swift
+//  UIApplication+Utils.swift
 //  Outside Now
 //
 //  Created by Dave on 2/15/18.
@@ -9,10 +9,7 @@
 import UIKit
 
 extension UIApplication {
-    // Allows us to get the "top" or visible viewcontroller from anywhere
-    // This is useful when you want to display an alert from a class that
-    // isn't the currently visible viewController
-    //
+    /// Returns the top (visible VC) or nil
     class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)

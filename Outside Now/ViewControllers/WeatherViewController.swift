@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SafariServices
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -382,11 +383,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     
     @IBAction func darkSkyButtonPressed(_ sender: Any) {
         // The use of Dark Sky's API requires that they receive credit and a link to https://darksky.net/poweredby/
-        // be placed in the app
-        //
-        if let url = URL(string: "https://darksky.net/poweredby/") {
-            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-        }
+        guard let url = URL(string: "https://darksky.net/poweredby/") else { return }
+        let vc = SFSafariViewController(url: url)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func applicationWillEnterForeground() {
@@ -419,9 +418,4 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         //
         NotificationCenter.default.removeObserver(self)
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

@@ -30,6 +30,8 @@ struct NetworkClient {
 
     private let baseURL: String =  "https://api.darksky.net/forecast/"
 
+    private var cachedForecasts: [String: Forecast] = [:] // qwe
+
     /// Make a get request at the url passed in
     /// - warning: Data or Error is not returned on the main thread
     private func makeGetRequest(urlAddition: String, onSuccess: DataCallback?, onError: ErrorCallback?) {
@@ -55,6 +57,27 @@ struct NetworkClient {
     /// Returns Forecast struct or Error on the main thread for given latitude and longitude
     func getForecast(lat: Double, long: Double, onSuccess: ForecastCallback?, onError: ErrorCallback?) {
         self.makeGetRequest(urlAddition: "\(apiKey)/\(lat),\(long)", onSuccess: { data in
+            do {
+                let forecast = try JSONDecoder().decode(Forecast.self, from: data)
+                DispatchQueue.main.async {
+                    onSuccess?(forecast)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    onError?(RequestError.decodeFailed.makeError())
+                }
+                // FIXME: Log this error!
+            }
+        }, onError: { error in
+            DispatchQueue.main.async {
+                onError?(error)
+            }
+        })
+    }
+
+    // Returns Forecast struct or Error on the main thread for the GPS location at time provided
+    func getFutureForecast(lat: Double, long: Double, formattedTime: String, onSuccess: ForecastCallback?, onError: ErrorCallback?) {
+        self.makeGetRequest(urlAddition: "\(apiKey)/\(lat),\(long),\(formattedTime)", onSuccess: { data in
             do {
                 let forecast = try JSONDecoder().decode(Forecast.self, from: data)
                 DispatchQueue.main.async {

@@ -22,6 +22,7 @@
 		5522EE2A22F621B400CAF52F /* Int+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2922F621B400CAF52F /* Int+Utils.swift */; };
 		5522EE2D22F6317400CAF52F /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2C22F6317400CAF52F /* NetworkClient.swift */; };
 		5522EE2F22F63F2200CAF52F /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE2E22F63F2200CAF52F /* UIImage+Utils.swift */; };
+		5522EE3522F74E4F00CAF52F /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522EE3422F74E4F00CAF52F /* WeatherViewModel.swift */; };
 		5550E378203F4C7B00C9A5A5 /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */; };
 		55552310203662A200204E80 /* WeeklySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555230F203662A200204E80 /* WeeklySummaryCell.swift */; };
 		55552312203662CF00204E80 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55552311203662CF00204E80 /* WeatherCell.swift */; };
@@ -80,6 +81,7 @@
 		5522EE2922F621B400CAF52F /* Int+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Utils.swift"; sourceTree = "<group>"; };
 		5522EE2C22F6317400CAF52F /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		5522EE2E22F63F2200CAF52F /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+		5522EE3422F74E4F00CAF52F /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		5550E377203F4C7B00C9A5A5 /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
 		5555230F203662A200204E80 /* WeeklySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummaryCell.swift; sourceTree = "<group>"; };
 		55552311203662CF00204E80 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		5506399020350B3A00FFF284 /* Outside Now */ = {
 			isa = PBXGroup;
 			children = (
+				5522EE3322F74E3900CAF52F /* ViewModels */,
 				5522EE2B22F6316000CAF52F /* Network */,
 				551E6DEF20350CAC00455A3E /* Structs */,
 				551E6DEC20350C7A00455A3E /* Cells */,
@@ -247,6 +250,14 @@
 				5522EE2C22F6317400CAF52F /* NetworkClient.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		5522EE3322F74E3900CAF52F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5522EE3422F74E4F00CAF52F /* WeatherViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		55FB2F6622F5F9EE0002940C /* Stubs */ = {
@@ -491,6 +502,7 @@
 				55BA93DA203F364B002FD324 /* DayViewController.swift in Sources */,
 				5522EE2F22F63F2200CAF52F /* UIImage+Utils.swift in Sources */,
 				55A67D3C2036052C0060334A /* UIViewController+Utils.swift in Sources */,
+				5522EE3522F74E4F00CAF52F /* WeatherViewModel.swift in Sources */,
 				551E6DEB20350C6500455A3E /* Double+Utils.swift in Sources */,
 				5585BDEB20387F1E0076AD4D /* UIScrollView+Utils.swift in Sources */,
 				5522EE2A22F621B400CAF52F /* Int+Utils.swift in Sources */,

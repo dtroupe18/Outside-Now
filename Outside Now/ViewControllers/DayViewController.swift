@@ -156,7 +156,6 @@ class DayViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "enhancedHourlyCell", for: indexPath) as! HourlyTableViewCell
-
         let hourlyData = forcast.hourly.data[indexPath.row]
 
         cell.timeLabel.text = hourlyData.hourString(timeZone: placemark.timeZone)
